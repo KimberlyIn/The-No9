@@ -1,0 +1,69 @@
+
+// RecProductsCard_Swiper
+.swiper-button-prev {
+  color: #8d8d8d;
+}
+.swiper-button-next {
+  color: #8d8d8d;
+}
+.swiper-pagination-bullet {
+  background-color: #8d8d8d;
+}
+.res-product {
+  ul {
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    i {
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+  }
+}
+
+// ArticlesSwiper
+.article-swiper {
+  .swiper-container {
+    padding: 0 63px;
+  }
+  li {
+    position: relative;
+    .swiper-text {
+      position: absolute;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      text-align: center;
+      transition: all 0.3s;
+      .text-place {
+        position: absolute;
+        top: 50%;
+        left: 50%; 
+        transform: translate(-50%, -50%);
+      }
+      &:hover {
+        opacity: 1;
+        background-color: rgba(255, 254, 254, 0.897);
+      }
+    }
+  }
+}
+
+.global-img {
+  width: 100%;
+  height:500px;
+  overflow: hidden;
+  img {
+    width: 100%;
+    height: 100%;
+		object-fit: cover;
+  }
+}
+
+.blog-container {
+  padding-top: 100px;
+}

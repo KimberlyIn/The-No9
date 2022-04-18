@@ -1,0 +1,70 @@
+.container {
+  .col-md-6-carousel {
+    overflow: hidden;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+  .col-4-input {
+    width: 100px;
+    height: 52px;
+    .form-control {
+      width: 70px;
+      padding: 13px;
+    }
+    .btn-outline-secondary:hover {
+      color: #fff;
+      background-color: #a7a7a7;
+      border-color: #b6b6b6;
+    }
+  }
+  .col-6 {
+    .btn {
+      padding: 13px 65px;
+      background-color: #ffcdab;
+      transition: all 0.3s;
+      &:hover {
+        color: #FAFAFA;
+        background-color: #3B3B3B;
+      }
+    }
+  }
+}
+
+
+
+// components
+.res-product {
+  ul {
+    padding: 0;
+    margin: 0;
+    li {
+      position: relative;        
+      .menu-detail {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        text-align: center;
+        transition: all 0.3s;         
+        .set-in-center {            
+          position: absolute;
+          top: 50%;
+          left: 50%;            
+          transform: translate(-50%, -50%);
+        }
+        &:hover {
+          opacity: 1;
+          background-color: rgba(255, 254, 254, 0.767);
+        }
+      }    
+      i {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+      }
+    }
+  }
+}

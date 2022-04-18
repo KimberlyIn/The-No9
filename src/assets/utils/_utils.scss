@@ -1,0 +1,96 @@
+// 全站文字類顏色
+$title-color: #212529;
+$text-color: #606060;
+$text-color-9c: #9C9C9C;
+
+
+body {
+  font-family: "Helvetica", "Arial","LiHei Pro","微軟正黑體", "SFMono-Regular", sans-serif;
+}
+.div-backend-top {
+  padding-top: 50px;
+}
+.div-front-top {
+  padding-top: 90px;
+}
+.header {
+  background-color:  #F8F9FA;
+}
+.container {
+  width: 1200px;
+}
+.offcanvas-end {
+  width: 350px;
+}
+.title {
+  color: $title-color;
+}
+.text-explain {
+  color: $text-color;
+}
+.text-color-9c {
+  color: $text-color-9c;
+}
+.close {
+  background: none;
+}
+a {
+  text-decoration: none;
+}
+p {
+  margin: 0;
+}
+img {
+  width: 100%;
+}
+.text-spac {
+  letter-spacing: 2px;
+}
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+button, .btn {
+  border: none;
+  &:focus {
+    outline: none;
+    box-shadow: none;
+  }
+}
+.discolor-button {
+  padding: 12px 45px !important;
+  border: none;
+  font-size: 15px;
+  color: #FAFAFA;
+  opacity: 0.8;
+  background-color: #3B3B3B;
+  transition: all 0.5s;
+  &:hover {
+    color: #3B3B3B;
+    background-color: #ffcdab;
+  }
+}
+.discolor-button-light {
+  padding: 12px 45px !important;
+  border: none;
+  font-size: 15px;
+  color: #3B3B3B;
+  opacity: 0.8;
+  background-color: #ffcdab;
+  transition: all 0.3s;
+  &:hover {
+    color: #FAFAFA;
+    background-color: #3B3B3B;
+  }
+}
+.header-img {
+  width: 100%;
+  height: 300px;
+  overflow: hidden;
+  img {
+		width: 100%;
+    height: 100%;
+		object-fit: cover;
+	}
+}
