@@ -194,7 +194,7 @@
                       data-bs-dismiss="offcanvas"
                       @click="removeCartAll('all')"
                     >
-                    清空購物車
+                      清空購物車
                     </button>
                   </div>
                   <div class="col-6 col-6 ps-1 pe-4">

@@ -22,7 +22,8 @@
           top: 50%;
           button {
             border: none;
-            padding: 10px 30px;
+            margin-top: 20px;
+            padding: 12px 45px;
           }
           .col-4-p {
             letter-spacing: 2px;
@@ -35,5 +36,16 @@
         }
       }
     }
+    @include media-breakpoint-down(lg) {
+      .col-4 {
+        width: 100% ;
+      }
+    }
   }
 }
+@include media-breakpoint-down(lg) {
+  .main-div {
+    flex-direction: column;
+  }
+}
+
