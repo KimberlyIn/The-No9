@@ -17,7 +17,7 @@
               <div class="swiper-text">
                 <div class="text-place">
                   <p class="mb-2 fw-bolder text-dark">{{ article.title }}</p>
-                  <small class="text-spac text-secondary">{{ $filters.date(article.create_at) }}</small>
+                  <small class="text-spac text-secondary">{{ $filters.date(article.create_at) }}</small> 
                 </div>
               </div>
             </a>
