@@ -1,10 +1,10 @@
 <template>
-  <div class="div-front-top">
+  <div class="blog div-front-top">
     <!-- 圖片輪撥 -->
     <!-- <div class="header-img">
       <img src="https://images.unsplash.com/photo-1621252346441-c42a54aa8707?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80" alt="">
     </div> -->
-    <div class="header-bg w-100" style="height: 500px; background-color: #C9C9C9;">
+    <div class="header-bg w-100" style="background-color: #C9C9C9;">
       <div class="container bg-white">
         <!-- 精選文章 -->
         <ArticlesSwiper />

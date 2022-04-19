@@ -4,14 +4,14 @@
       <div>
         <img src="https://i.ibb.co/7yssxg4/IMG-3829.png" alt="">
       </div>
-      <div class="container" style="width: 1500px">
-        <div class="row pb-4" style="padding-top: 100px;">
-          <div class="col-6">
+      <div class="container">
+        <div class="row">
+          <div class="col-6 about-int-col-6">
             <div class="pb-4">
               <img src="@/assets/images/logo.gif" alt="TheNo9-LOGO" style="width: 220px;">
             </div>
             <div class="text-spac" style="line-height: 26px;">
-              <p class="pe-5">
+              <p>
                 記得當時只是想讓自己的學分快點修滿，於是選了一堂好像有點新奇的課，然後跟著慢慢製作，卻突然的就做出了興趣；某天我把家裡堆滿雜物的倉庫清出一個小角落，一張便宜的桌子和一些簡單的工具，於是 THE NO.9 就這麼開始了。
                 <br/>
                 <br/>
@@ -25,14 +25,15 @@
               </p>
             </div>
           </div>
-          <div class="col-6 d-flex align-items-center">
-            <div class="ps-5">
-              <img src="https://i.ibb.co/dMF4k7v/IMG-2070.png" alt="" style="width: 550px;">
+          <div class="col-6 about-img-col-6 d-flex align-items-center">
+            <div>
+              <img src="https://i.ibb.co/dMF4k7v/IMG-2070.png" alt="">
             </div>
           </div>
+          <hr class="my-5">
         </div>
-        <hr>
-        <div class="py-5">
+        
+        <div class="copyright py-5">
           <h4>版權宣告</h4>
           <p class="mb-1">THE NO.9 網站 圖片 及 文字 僅供個人作品集使用，不提供轉載、引用及商業用途。</p>
           <p>圖片來源：THE NO.9、unsplash</p>

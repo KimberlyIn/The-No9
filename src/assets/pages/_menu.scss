@@ -36,5 +36,10 @@
         }
       }
     }
+    @include media-breakpoint-down(md) {
+      ul {
+        width: 100% ;
+      }
+    }
   }
 }  

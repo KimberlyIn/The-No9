@@ -18,3 +18,61 @@
     color: #000;
   }
 }
+
+.blog-container {
+  padding-top: 100px;
+}
+
+
+@include media-breakpoint-down(lg) {
+  .blog {
+    .header-bg {
+      display: none;
+    }
+    .blog-container {
+      padding-top: 40px;
+    }
+    .row {
+      position: relative;
+      .col-3 {
+        position: absolute;
+        width: 100%;
+      }
+      .col-8 {
+        width: 100% ;
+        padding: 90% 1% 0 1%;
+      }
+    }
+  }
+  
+}
+
+@include media-breakpoint-down(md) {
+  .blog {
+    .row {
+      .col-8 {
+        padding: 120% 2% 0 2%;
+      }
+    }
+  }
+}
+
+@include media-breakpoint-down(sm) {
+  .blog {
+    .row {
+      .col-8 {
+        padding: 700px 10px 0 10px;
+      }
+    }
+  }
+}
+
+// @include media-breakpoint-down(xs) {
+//   .blog {
+//     .row {
+//       .col-8 {
+//         padding: 120% 0 0 0;
+//       }
+//     }
+//   }
+// }
