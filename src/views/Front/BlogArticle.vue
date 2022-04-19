@@ -1,5 +1,5 @@
 <template>
-  <div class="div-front-top">
+  <div class="div-front-top blog-article">
     <div class="header-bg w-100" style="height: 500px; background-color: #C9C9C9;">
       <div class="container bg-white">
         <!-- 精選文章 -->
@@ -7,28 +7,30 @@
       </div>
     </div>
     <div class="container blog-container">
-      <div class="mb-3">
-        <router-link class="hover-black-a" to="/blog">
-          <small>回到文章列表</small>
-        </router-link>
-      </div>
       <div class="row pb-5 justify-content-between">
         
-        <div class="col-8 border py-5 px-5">
-          <div class="pb-3" style="display: inline-block;">
-            <div class="">
-              <h5 class="mb-1 text-spac fw-bolder">{{ article.title }}</h5>
-            </div>
-            <div class="text-secondary">
-              <small class="pe-2 text-spac">{{ $filters.date(article.create_at) }}</small>
-              <small>作者：Nine</small>
-            </div>
+        <div class="col-8">
+          <div class="mb-3">
+            <router-link class="hover-black-a" to="/blog">
+              <small>回到文章列表</small>
+            </router-link>
           </div>
-          <!-- 文章內容 -->
-          <div>
-            <img :src="article.imageUrl" alt="">
+          <div class="article-col-8 border">
+            <div class="pb-3" style="display: inline-block;">
+              <div>
+                <h5 class="mb-1 text-spac fw-bolder">{{ article.title }}</h5>
+              </div>
+              <div class="text-secondary">
+                <small class="pe-2 text-spac">{{ $filters.date(article.create_at) }}</small>
+                <small>作者：Nine</small>
+              </div>
+            </div>
+            <!-- 文章內容 -->
+            <div>
+              <img :src="article.imageUrl" alt="">
+            </div>
+            <div class="py-5" v-html="article.content"></div>
           </div>
-          <div class="py-5" v-html="article.content"></div>
         </div>
         <div class="col-3">
           <div class="border">
