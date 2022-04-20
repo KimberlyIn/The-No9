@@ -10,7 +10,7 @@
     } 
     @include media-breakpoint-down(xl) {
       .col-6 {
-        width: 100% ;
+        width: 100%;
       }
       .about-int-col-6 {
         padding: 50px 0;
@@ -28,6 +28,44 @@
     }
     .copyright {
       padding: 0 30px;
+    }
+  }
+}
+
+// ProductIllustrate
+.product-illustrate {
+  .leather-care {
+    .leather-care-col-6 {
+      padding-right: 20px;
+    }
+  }
+  .precautions {
+    .precautions-img {
+      padding: 3rem 3rem 0 0 ;
+    }
+    @include media-breakpoint-down(lg) {
+      .precautions-img {
+        padding: 0;
+      }
+    }
+    .precautions-text {
+      padding: 3rem 3rem 0 3rem;
+    }
+    @include media-breakpoint-down(lg) {
+      .precautions-text {
+        padding: 3rem 0 0 0;
+      }
+    }
+  }
+}
+@include media-breakpoint-down(lg) {
+  .product-illustrate {
+    .col-6 {
+      width: 100%;
+      padding: 0;
+    }
+    .image-col-6 {
+      display: none !important;
     }
   }
 }

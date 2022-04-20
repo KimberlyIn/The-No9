@@ -1,5 +1,5 @@
 <template>
-  <div class="div-front-top">
+  <div class="product div-front-top">
     <div class="header w-100 py-5"></div>
     <div class="container pt-5">
       <div class="row pb-5">
@@ -34,7 +34,7 @@
             <!-- 商品圖片 -->
           </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-6 mobile-top">
           <div class="mb-2 fs-6">
             <span>首頁</span>
             &nbsp;/&nbsp;
@@ -59,47 +59,49 @@
               {{ product.content }}
             </p>
           </div>
-          <div class="d-flex mb-4">
-            <div class="col-4 col-4-input d-flex me-4">
-              <div class="input-group-prepend border border-end-0">
-                <input
-                  type="text"
-                  class="form-control border-0 text-center my-auto shadow-none bg-light"
-                  placeholder=""
-                  v-model.number="cart.quantity"
-                  disabled
-                />
-              </div>
-              <div class="input-group-append">
-                <div class="border">
-                  <button
-                    class="btn btn-outline-secondary border-0 py-0 px-1 rounded-0"
-                    type="button"
-                    @click.prevent="addNumber"
-                  >
-                    <i class="bi bi-plus"></i>
-                  </button>
+          <div class="get-cart">
+            <div class="row d-flex mb-4">
+              <div class="col-4 col-4-input d-flex me-4">
+                <div class="input-group-prepend border border-end-0">
+                  <input
+                    type="text"
+                    class="form-control border-0 text-center my-auto shadow-none bg-light"
+                    placeholder=""
+                    v-model.number="cart.quantity"
+                    disabled
+                  />
                 </div>
-                <div class="border">
-                  <button
-                    class="btn btn-outline-secondary border-0 rounded-0 py-0 px-1"
-                    type="button"
-                    :disabled="!cart.isDash"
-                    @click.prevent="dashNumber"
-                  >
-                    <i class="bi bi-dash"></i>
-                  </button>
+                <div class="input-group-append">
+                  <div class="border">
+                    <button
+                      class="btn btn-outline-secondary border-0 py-0 px-1 rounded-0"
+                      type="button"
+                      @click.prevent="addNumber"
+                    >
+                      <i class="bi bi-plus"></i>
+                    </button>
+                  </div>
+                  <div class="border">
+                    <button
+                      class="btn btn-outline-secondary border-0 rounded-0 py-0 px-1"
+                      type="button"
+                      :disabled="!cart.isDash"
+                      @click.prevent="dashNumber"
+                    >
+                      <i class="bi bi-dash"></i>
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="col-6">
-              <button 
-                class="btn btn-lg rounded-0 fs-6"
-                type="button"
-                @click="addToCart"
-              >
-                加入購物車
-              </button>
+              <div class="col-6">
+                <button 
+                  class="btn btn-lg rounded-0 fs-6"
+                  type="button"
+                  @click="addToCart"
+                >
+                  加入購物車
+                </button>
+              </div>
             </div>
           </div>
           <div>
