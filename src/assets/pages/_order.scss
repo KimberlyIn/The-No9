@@ -23,6 +23,11 @@
       }
     }
   }
+  @include media-breakpoint-down(md) {
+    .order-header {
+      display: none;
+    }
+  }
   .order-body {
     .check-cart {
       thead, tbody, tfoot, tr, td, th {
@@ -50,6 +55,46 @@
         padding-left: 5px;
         color: white;
       }
+      .mobile-check-cart {
+        display: none;
+      }
+      @include media-breakpoint-down(lg) {
+        .mobile-check-cart {
+          display: block;
+          .cartBox-img {
+            width: 100px;
+            height: 100px;
+            overflow: hidden;
+            img {
+              width: 100%;
+              height: 100%;
+              object-fit: cover;
+            }
+          }
+          .product-delete {
+            button {
+              padding: 0;
+            }
+          }
+          .nav-input {
+            width: 50%;
+          }
+        }
+        .desktop-check-cart {
+          display: none;
+        }
+      }
+      @include media-breakpoint-down(md) {
+        .coupon-item {
+          flex-direction: column;
+          .col-6 {
+            width: 100%;
+          }
+        }
+        .remove-cart {
+          text-align: right;
+        }
+      }
     }
     .check-order {
       .check-order-list {
@@ -65,10 +110,32 @@
         .col-12 {
           margin-bottom: 30px;
         }
+        @include media-breakpoint-down(md) {
+          .mobile-email {
+            width: 100%;
+          }
+          .mobile-pay {
+            width: 100%;
+          }
+        }
       }
       .order-details {
         thead, tbody, tfoot, tr, td, th {
           border-style: none;
+        }
+        .product-title {
+          float: left;
+        }
+        .price-total {
+          float: right;
+        }
+        @include media-breakpoint-down(sm) {
+          .product-title {
+            float: none;
+          }
+          .price-total {
+            float: none;
+          }
         }
       }
     }
@@ -78,6 +145,13 @@
       }
       #inputPayment {
         border-radius: 0;
+      }
+    }
+    @include media-breakpoint-down(sm) {
+      .order-received {
+        .col-4 {
+          width: 100%;
+        }
       }
     }
     button {

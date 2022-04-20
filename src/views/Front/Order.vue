@@ -52,14 +52,14 @@
         </ul>
       </div>
       <div>
-        <div class="container w-75"> 
+        <div class="container"> 
           <div class="order-body py-4">
             <!-- 購物車確認 check-cart -->
             <div 
               class="check-cart"
               v-if="stepStatus.checkCart"
             >
-              <table class="table align-middle border">
+              <table class="table desktop-check-cart align-middle border">
                 <thead class="border">
                   <tr>
                     <th></th>
@@ -135,6 +135,92 @@
                 </tbody>
               </table>
 
+              <!-- 手機版 -->
+              <div class="mobile-check-cart py-3">
+                <ul 
+                  class="list-unstyled px-3 border"
+                  v-for="item in cart.carts" :key="item.id"
+                >
+                  <li class="py-3 d-flex justify-content-between">
+                    <div class="product-delete pe-4 align-self-center">
+                      <button 
+                        type="button" 
+                        class="close"
+                        @click="removeCartItem(item.id)"  
+                      > 
+                        <i class="bi bi-x"></i>
+                      </button>
+                    </div> 
+                    <div class="cartBox-img">
+                      <a 
+                        href="#"
+                        data-bs-dismiss="offcanvas"
+                        @click.prevent="viewProduct(item.product_id)"
+                      >
+                        <img :src="item.product.imageUrl" alt="">
+                      </a>
+                    </div>
+                    <div class="cart-product align-self-start flex-fill ps-3">
+                      <h6 class="fw-bold">
+                        <a 
+                          class="text-dark" 
+                          href="#"
+                          data-bs-dismiss="offcanvas"
+                          @click.prevent="viewProduct(item.product_id)"
+                        >{{ item.product.title }}</a>
+                      </h6>
+                      <div class="qty-price d-flex pe-3">                    
+                        <small class="price  text-secondary">$ {{ item.product.price }} / </small>                       
+                        <small class="unit ps-1">{{ item.product.unit }}</small>
+                      </div>
+                      <div class="d-flex align-items-center justify-content-between">
+                        <div class="nav-input input-group bg-light rounded me-3 mt-2 border">
+                          <div class="input-group-prepend">
+                            <button
+                              class="btn btn-outline-secondary border-0 rounded-0 py-2 px-1 border-end"
+                              type="button"
+                              :disabled="item.qty === 1 || loadingStatus.loadingItem === item.id"
+                              @click="updateCart(item, -1)"
+                            >
+                              <i class="bi bi-dash"></i>
+                            </button>
+                          </div>
+                          <input
+                            type="text"
+                            class="form-control border-0 text-center my-auto shadow-none px-1 bg-light fs-6 text-secondary"
+                            placeholder=""
+                            v-model.number="item.qty"
+                            disabled
+                          />
+                          <div class="input-group-append">
+                            <button
+                              class="btn btn-outline-secondary border-0 rounded-0 py-2 px-1 border-start"
+                              type="button"
+                              :disabled="loadingStatus.loadingItem === item.id"
+                              @click="updateCart(item, 1)"
+                            >
+                              <i class="bi bi-plus"></i>
+                            </button>
+                          </div>
+                        </div>
+                        <div>
+                          <div
+                            class="spinner-border spinner-border-sm text-muted me-2"
+                            role="status"
+                            v-if="loadingStatus.loadingItem === item.id"
+                          >
+                            <span class="visually-hidden">Loading...</span>
+                          </div>
+                          <small class="text-secondary">小計：
+                            <br>
+                            NT$ {{ item.total }}</small>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                </ul>  
+              </div>
+              <!-- 手機版 -->
               <div>
                 <div>
                   <div class="mt-5">
@@ -142,7 +228,7 @@
                       <i class="bi bi-arrow-right-circle-fill"></i>
                       周年慶期間消費贈送的優惠券碼，可享有85折優惠！
                     </span>
-                    <div class="mt-2 d-flex justify-content-between">
+                    <div class="coupon-item mt-2 d-flex justify-content-between">
                       <div class="col-6">
                         <Form v-slot="{ errors }" @submit="onDiscount">
                           <div class="input-group mb-3">
@@ -170,7 +256,7 @@
                           </div>
                         </Form>
                       </div>
-                      <div>
+                      <div class="remove-cart">
                         <button 
                           type="button"
                           class="discolor-button-light"
@@ -352,11 +438,11 @@
                     <label for="phone" class="form-label">電話</label>
                     <p>{{ form.user.tel }}</p>
                   </div>
-                  <div class="col-6">
+                  <div class="col-6 mobile-email">
                     <label for="inputEmail" class="form-label">信箱</label>
                     <p>{{ form.user.email }}</p>
                   </div>
-                  <div class="col-6">
+                  <div class="col-6 mobile-pay">
                     <label for="inputPayment" class="form-label">付款方式</label>
                     <p>{{ form.user.payment }}</p>
                   </div>
@@ -384,10 +470,10 @@
                           ></div>
                         </td>
                         <td>
-                          <div class="float-start">
+                          <div class="product-title">
                             {{ item.product.title }} x {{ item.qty }}
                           </div>
-                          <div class="float-end text-color-9c">
+                          <div class="price-total text-color-9c">
                           NT$ {{ item.total }}
                           </div>
                         </td>
@@ -651,6 +737,9 @@ export default {
     },
     onDiscount() {
       this.getDisCount(this.discountCode);
+    },
+    viewProduct(productId) {
+      this.$router.push(`/product/${productId}`);
     },
   },
   mounted() {

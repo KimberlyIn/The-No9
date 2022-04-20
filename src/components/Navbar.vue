@@ -6,7 +6,16 @@
         <router-link class="navbar-brand text-secondary" to="/">
           <img src="@/assets/images/logo.gif" alt="TheNo9-LOGO" style="width: 160px;" class="me-3" />
         </router-link>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <!-- @click="openNav" -->
+        <button 
+          class="navbarBtn navbar-toggler" 
+          type="button" 
+          data-bs-toggle="collapse" 
+          data-bs-target="#navbarNavAltMarkup" 
+          aria-controls="navbarNavAltMarkup" 
+          aria-expanded="false" 
+          aria-label="Toggle navigation"
+        >
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
@@ -96,7 +105,6 @@
                 <ul 
                   class="list-unstyled"
                   v-for="item in cart.carts" :key="item.id"
-                  style="width: 447px;"
                 >
                   <li class="py-3 d-flex justify-content-between border-bottom">
 
@@ -160,7 +168,9 @@
                           >
                             <span class="visually-hidden">Loading...</span>
                           </div>
-                          <small class="text-secondary">小計：NT$ {{ item.total }}</small>
+                          <small class="text-secondary">小計：
+                            <br>
+                            NT$ {{ item.total }}</small>
                         </div>
                       </div>
                     </div>
@@ -224,6 +234,7 @@
 export default {
   data() {
     return {
+      toggler: false,
       cart: {},
       loadingStatus: {
         loadingItem: '',
@@ -239,6 +250,7 @@ export default {
     }
   },
   inject: ['emitter', '$httpMessageState'],
+  // emits: ['toggle-overlay'],
   methods: {
     getCart() {
       const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/cart`;
@@ -322,6 +334,20 @@ export default {
     viewProduct(productId) {
       this.$router.push(`/product/${productId}`);
     },
+    // 手機版選單自動收合
+    // openNav() {
+    //   this.toggleNav = !this.toggleNav;
+    //   if (this.toggleNav) {
+    //     this.toggleNav = true;
+    //     this.$emitter.emit('toggle-overlay', true);
+    //   } else {
+    //     this.closeNav();
+    //   }
+    // },
+    // closeNav() {
+    //   this.toggleNav = false;
+    //   this.$emitter.emit('toggle-overlay', false);
+    // },
   },
   mounted() {
     this.getCart();
