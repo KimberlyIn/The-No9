@@ -18,6 +18,7 @@ import 'aos/dist/aos.css';
 // vue3-loading-overlay
 import Loading from 'vue3-loading-overlay';
 import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
+import CKEditor from '@ckeditor/ckeditor5-vue';
 // vee-validate 主套件
 import { Form, Field, ErrorMessage, defineRule, configure } from 'vee-validate';
 import AllRules from '@vee-validate/rules'
@@ -59,6 +60,7 @@ app.config.globalProperties.$httpMessageState = $httpMessageState;
 app.use(router);
 app.use(VueAxios, axios);
 app.use(VueAwesomeSwiper);
+app.use(CKEditor);
 app.component('Loading', Loading);
 app.component('Form', Form);
 app.component('Field', Field);

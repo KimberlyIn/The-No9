@@ -12,15 +12,16 @@
       <div class="modal-content border-0">
         <div class="modal-header bg-dark text-white">
           <h5 class="modal-title" id="exampleModalLabel">
-            <span>新增貼文</span>
-            <span>編輯貼文</span>
+            <span v-if="isNew">新增貼文</span>
+            <span v-else>編輯貼文</span>
           </h5>
           <button
             type="button"
             class="btn-close"
             data-bs-dismiss="modal"
             aria-label="Close"
-          ></button>
+          >
+          </button>
         </div>
         <div class="modal-body">
           <div class="row">
@@ -31,6 +32,7 @@
                   type="text"
                   class="form-control"
                   id="title"
+                  v-model="tempArticle.title"
                   placeholder="請輸入標題"
                 />
               </div>
@@ -40,6 +42,7 @@
                   type="text"
                   class="form-control"
                   id="image"
+                  v-model="tempArticle.imageUrl"
                   placeholder="請輸入圖片連結"
                 />
               </div>
@@ -49,6 +52,7 @@
                   type="text"
                   class="form-control"
                   id="author"
+                  v-model="tempArticle.author"
                   placeholder="請輸入標題"
                 />
               </div>
@@ -58,6 +62,7 @@
                   type="date"
                   class="form-control"
                   id="create_at"
+                  v-model="create_at"
                 />
               </div>
             </div>
@@ -66,17 +71,21 @@
               <div class="row gx-1 mb-3">
                 <div
                   class="col-md-2 mb-1"
+                  v-for="(label, key) in tempArticle.tag"
+                  :key="key"
                 >
                   <div class="input-group input-group-sm">
                     <input
                       type="text"
                       class="form-control form-control"
                       id="tag"
+                      v-model="tempArticle.tag[key]"
                       placeholder="請輸入標籤"
                     />
                     <button
                       type="button"
                       class="btn btn-outline-danger"
+                      @click="tempArticle.tag.splice(key, 1)"
                     >
                       <i class="bi bi-x"></i>
                     </button>
@@ -84,9 +93,11 @@
                 </div>
                 <div
                   class="col-md-2 mb-1"
+                  v-if="tempArticle.tag[tempArticle.tag.length - 1] || !tempArticle.tag.length"
                 >
                   <button
                     class="btn btn-outline-primary btn-sm d-block w-100"
+                    @click="tempArticle.tag.push('')"
                   >
                     新增標籤
                   </button>
@@ -99,11 +110,15 @@
                   class="form-control"
                   id="description"
                   placeholder="請輸入文章描述"
+                  v-model="tempArticle.description"
                 ></textarea>
               </div>
               <div class="mb-3">
-                <!-- <ckeditor
-                ></ckeditor> -->
+                <ckeditor
+                  :editor="editor"
+                  :config="editorConfig"
+                  v-model="tempArticle.content"
+                ></ckeditor>
               </div>
               <div class="mb-3">
                 <div class="form-check">
@@ -111,6 +126,7 @@
                     class="form-check-input"
                     type="checkbox"
                     id="isPublic"
+                    v-model="tempArticle.isPublic"
                   />
                   <label class="form-check-label" for="isPublic">
                     是否公開
@@ -131,6 +147,7 @@
           <button
             type="button"
             class="btn btn-primary"
+            @click="$emit('update-article', tempArticle)"
           >
             確認
           </button>
@@ -142,6 +159,8 @@
 
 <script>
 import modalMixin from '@/mixins/modalMixin';
+// 新增文章編輯器
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 export default {
   props: {
@@ -156,11 +175,35 @@ export default {
       default: true,
     },
   },
-  mixins: [modalMixin],
   data() {
     return {
+      status: {},
       modal: '',
+      tempArticle: {
+        tag: [''],
+      },
+      creat_at: 0,
+      editor: ClassicEditor,
+      editorConfig: {
+        toolbar: ['heading', 'typing', 'bold', 'italic', '|', 'link'],
+      },
     }
+  },
+  mixins: [modalMixin],
+  watch: {
+    article() {
+      this.tempArticle = {
+        ...this.article,
+        tag: this.article.tag || [],
+        isPublic: this.article.isPublic || false,
+      };
+      [this.create_at] = new Date(this.tempArticle.create_at * 1000)
+        .toISOString()
+        .split('T');
+    },
+    create_at() {
+      this.tempArticle.create_at = Math.floor(new Date(this.create_at) / 1000);
+    },
   },
 }
 </script>
