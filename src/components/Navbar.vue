@@ -1,9 +1,9 @@
 <template>
 <Loading :active="isLoading"></Loading>
   <div class="fixed-top">
-    <!-- :class="toggleNav ? 'show' : ''" -->
+    <!-- :class="toggleNav ? 'position-fixed vh-100 overflow-hidden' : ''" -->
     <nav class="navbar navbar-expand-lg navbar-light py-4 px-4">
-      <div class="container-fluid" :class="toggleNav ? 'position-fixed vh-100 overflow-hidden' : ''"> 
+      <div class="container-fluid" > 
         <router-link class="navbar-brand text-secondary" to="/">
           <img src="@/assets/images/logo.gif" alt="TheNo9-LOGO" style="width: 160px;" class="me-3" />
         </router-link>
