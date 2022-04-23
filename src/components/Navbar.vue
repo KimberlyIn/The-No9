@@ -19,19 +19,20 @@
         >
           <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse justify-content-end" :class="toggleNav ? 'show' : ''" id="navbarNavAltMarkup">
+        <!-- :class="toggleNav ? 'show' : ''" -->
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
           <div class="navbar-nav">
             <a class="nav-link pe-4" aria-current="page" href="#">首頁</a>
             <router-link class="nav-link pe-4" to="/menu">精緻皮件</router-link>
             <router-link class="nav-link pe-4" to="/about">關於我們</router-link>
             <router-link class="nav-link pe-4" to="/blog">部落格</router-link>
-            <a 
+            <!-- <a 
               class="nav-link"
               data-bs-toggle="modal"
               data-bs-target="#exampleModal"
             >
               <i class="bi bi-search"></i>
-            </a>
+            </a> -->
             <!-- 搜尋全屏 -->
             <!-- Modal -->
             <!-- <div class="modal fade modal-search" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
