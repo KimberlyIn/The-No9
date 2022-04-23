@@ -34,7 +34,7 @@
             </a>
             <!-- 搜尋全屏 -->
             <!-- Modal -->
-            <div class="modal fade modal-search" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <!-- <div class="modal fade modal-search" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
               <div class="modal-dialog">
                 <div class="modal-content">
                   <div class="modal-header">
@@ -49,7 +49,7 @@
                   </div>
                 </div>
               </div>
-            </div>       
+            </div>        -->
             <!-- 搜尋全屏結束 -->
             <div class="d-flex me-3 fun-bar">
               <a 
