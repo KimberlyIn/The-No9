@@ -1,60 +1,68 @@
 <template>
+  <!-- 
+    1.抓取所有文章列表 
+    2.對每個位置補上抓到的對應資料
+    3.製作建立新文章：串接 post Api
+    4.
+  -->
   <div>
-    <Loading :active="isLoading" :z-index="1060"></Loading>
-    <div class="text-end mt-4">
-      <button class="btn btn-primary" type="button" @click="openModal(true)">
-        建立新的頁面
-      </button>
+    <div class="div-backend-top">
+      <!-- <Loading :actuve="isLoading" :z-index="1060"></Loading> -->
+      <div class="text-end mt-4 mx-5"> 
+        <button 
+          type="button" 
+          class="btn btn-secondary"
+          @click="openModal(true)"
+        >
+          建立新的頁面
+        </button>
+      </div>
+      <div class="px-3">
+        <table class="table table-hover mt-4">
+          <thead>
+            <tr>
+              <th>標題</th>
+              <th>作者</th>
+              <th>描述</th>
+              <th>建立時間</th>
+              <th>是否公開</th>
+              <th>編輯</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="article in articles" :key="article.id">
+              <td>{{ article.title }}</td>
+              <td>{{ article.author }}</td>
+              <td>{{ article.description }}</td>
+              <td>{{ $filters.date(article.create_at) }}</td>
+              <td>
+                <span class="text-success" v-if="article.isPublic">已上架</span>
+                <span v-else>未上架</span>
+              </td>
+              <td>
+                <button 
+                  type="button" 
+                  class="btn btn-sm btn-outline-secondary border-end-0 rounded-0"
+                  @click="getArticle(article.id)"
+                >
+                  編輯
+                </button>
+                <button 
+                  type="button" 
+                  class="btn btn-sm btn-outline-danger rounded-0"
+                  @click="openDelArticleModal(article)"
+                >
+                  刪除
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
-    <table class="table mt-4">
-      <thead>
-        <tr>
-          <th style="width: 200px">標題</th>
-          <th style="width: 200px">作者</th>
-          <th>描述</th>
-          <th style="width: 100px">建立時間</th>
-          <th style="width: 100px">是否公開</th>
-          <th style="width: 120px">編輯</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="article in articles" :key="article.id">
-          <td>{{ article.title }}</td>
-          <td>{{ article.author }}</td>
-          <td>{{ article.description }}</td>
-          <td>{{ $filters.date(article.create_at) }}</td>
-          <td>
-            <span v-if="article.isPublic">已上架</span>
-            <span v-else>未上架</span>
-          </td>
-          <td>
-            <div class="btn-group">
-              <button
-                class="btn btn-outline-primary btn-sm"
-                type="button"
-                @click="getArticle(article.id)"
-              >
-                編輯
-              </button>
-              <button
-                class="btn btn-outline-danger btn-sm"
-                type="button"
-                @click="openDelArticleModal(article)"
-              >
-                刪除
-              </button>
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <ArticleModal
-      ref="articleModal"
-      :article="tempArticle"
-      :is-new="isNew"
-      @update-article="updateArticle"
-    ></ArticleModal>
-    <DeleteProduct :item="tempArticle" ref="deleteProduct" @del-product="delArticle" />
+    <!-- ArticleModal.vue 中觸發 button @click="$emit('update-article', tempArticle)" -->
+    <ArticleModal :article="tempArticle" :is-new="isNew" ref="articleModal" @update-article="updateArticle"/>
+    <DeleteProduct :item="tempArticle" @del-product="delArticle" ref="deleteProduct"/>
   </div>
 </template>
 
@@ -63,62 +71,54 @@ import ArticleModal from '@/components/Backend/ArticleModal.vue';
 import DeleteProduct from '@/components/Backend/DeleteProduct.vue';
 
 export default {
+  inject: ['emitter', '$httpMessageState'],
+  components: {
+    ArticleModal,
+    DeleteProduct,
+  },
   data() {
     return {
       articles: [],
-      isLoading: false,
+      article: {},
+      isPublic: false,
       isNew: false,
       tempArticle: {},
       currentPage: 1,
     };
   },
-  inject: ['emitter'],
-  components: {
-    ArticleModal,
-    DeleteProduct,
+  mounted() {
+    // 這裡要執行才會出現列表
+    this.getArticles();
   },
   methods: {
     getArticles(page = 1) {
       this.currentPage = page;
       const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/articles?page=${page}`;
-      this.isLoading = true;
-      this.$http.get(api).then((response) => {
-        this.isLoading = false;
-        if (response.data.success) {
-          this.articles = response.data.articles;
-          this.pagination = response.data.pagination;
-        }
-      }).catch((error) => {
-        // axios 的錯誤狀態，可參考：https://github.com/axios/axios#handling-errors
-        console.log('error', error.response, error.request, error.message);
-        this.isLoading = false;
-        this.emitter.emit('push-message', {
-          title: '連線錯誤',
-          style: 'danger',
-          content: error.message,
-        });
-      });
+      this.$http.get(api)
+      .then((response)=>{
+        this.articles = response.data.articles;
+        this.pagination = response.data.pagination;
+      })
+      .catch((error)=>{
+        this.$httpMessageState(error.response, '錯誤訊息');
+      })
     },
     getArticle(id) {
       const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/article/${id}`;
-      this.isLoading = true;
-      this.$http.get(api).then((response) => {
-        this.isLoading = false;
-        if (response.data.success) {
+      this.$http.get(api)
+      .then((response)=>{
+        if(response.data.success) {
           this.openModal(false, response.data.article);
           this.isNew = false;
         }
-      }).catch((error) => {
-        // axios 的錯誤狀態，可參考：https://github.com/axios/axios#handling-errors
-        console.log('error', error.response, error.request, error.message);
-        this.isLoading = false;
-        this.emitter.emit('push-message', {
-          title: '連線錯誤',
-          style: 'danger',
-          content: error.message,
-        });
-      });
+      })
+      .catch((error) => {
+        this.$httpMessageState(error.response, '錯誤訊息');
+      })
     },
+    // 雖然 openModal 大致上都寫好，也在 button 正確的放上 click
+    // 但是 this.$refs.articleModal.openModal(); 需要靠 modalMixin 啟用
+    // 所以記得在 ArticleModal.vue 把 modalMixin 載入
     openModal(isNew, item) {
       if (isNew) {
         this.tempArticle = {
@@ -138,45 +138,45 @@ export default {
       let api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/article`;
       let httpMethod = 'post';
       let status = '新增貼文';
-      this.isLoading = true;
-      if (!this.isNew) {
+      
+      if(!this.isNew) {
         api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/article/${this.tempArticle.id}`;
         httpMethod = 'put';
-        status = '更新貼文';
+        status = '更新貼文'
       }
+      // this.$refs.articleModal.hideModal();
       const articleComponent = this.$refs.articleModal;
-      this.$http[httpMethod](api, { data: this.tempArticle }).then((response) => {
-        this.isLoading = false;
+      this.$http[httpMethod](api, { data: this.tempArticle })
+      .then((response)=>{
         this.$httpMessageState(response, status);
         articleComponent.hideModal();
+        // this.$refs.articleModal.hideModal();
         this.getArticles(this.currentPage);
-      }).catch((error) => {
-        this.isLoading = false;
+      })
+      .catch((error) => {
         this.$httpMessageState(error.response, '錯誤訊息');
+      })
+    },
+    delArticle() {
+      const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/article/${this.tempArticle.id}`;
+      this.$http.delete(api)
+      .then((response)=>{
+        this.$httpMessageState(response, '刪除貼文');
+        // this.$refs.deleteProduct.hideModal();
+        const delComponent = this.$refs.deleteProduct;
+        delComponent.hideModal();
+        this.getArticle(this.currentPage);
+      })
+      .catch((error)=>{
+        this.$httpMessageState(error.response, '刪除貼文');
       });
     },
     openDelArticleModal(item) {
       this.tempArticle = { ...item };
+      // this.$refs.deleteProduct.openModal();
       const delComponent = this.$refs.deleteProduct;
       delComponent.openModal();
     },
-    delArticle() {
-      const url = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/article/${this.tempArticle.id}`;
-      this.isLoading = true;
-      this.$http.delete(url).then((response) => {
-        this.isLoading = false;
-        this.$httpMessageState(response, '刪除貼文');
-        const delComponent = this.$refs.deleteProduct;
-        delComponent.hideModal();
-        this.getArticles(this.currentPage);
-      }).catch((error) => {
-        this.isLoading = false;
-        this.$httpMessageState(error.response, '刪除貼文');
-      });
-    },
   },
-  created() {
-    this.getArticles();
-  },
-};
+}
 </script>

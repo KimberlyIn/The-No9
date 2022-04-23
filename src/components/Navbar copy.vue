@@ -1,9 +1,8 @@
 <template>
 <Loading :active="isLoading"></Loading>
   <div class="fixed-top">
-    <!-- :class="toggleNav ? 'show' : ''" -->
     <nav class="navbar navbar-expand-lg navbar-light py-4 px-4">
-      <div class="container-fluid" :class="toggleNav ? 'position-fixed vh-100 overflow-hidden' : ''"> 
+      <div class="container-fluid"> 
         <router-link class="navbar-brand text-secondary" to="/">
           <img src="@/assets/images/logo.gif" alt="TheNo9-LOGO" style="width: 160px;" class="me-3" />
         </router-link>
@@ -19,7 +18,7 @@
         >
           <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse justify-content-end" :class="toggleNav ? 'show' : ''" id="navbarNavAltMarkup">
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
           <div class="navbar-nav">
             <a class="nav-link pe-4" aria-current="page" href="#">首頁</a>
             <router-link class="nav-link pe-4" to="/menu">精緻皮件</router-link>
@@ -227,10 +226,6 @@
         </div>
       </div>
     </nav>
-    <!-- :class="toggleNav ? 'show' : ''" -->
-    <div class="overlay">
-      <div class="overlay-inner" @click="closeNav"></div>
-    </div>
   </div>
   
 </template>
