@@ -3,7 +3,7 @@ import { createApp } from 'vue';
 // swiper
 import VueAwesomeSwiper from 'vue-awesome-swiper';
 // import style (>= Swiper 6.x)
-import 'swiper/swiper-bundle.css'
+import 'swiper/swiper-bundle.css';
 // import style (>= Swiper 5.x)
 // import 'swiper/css/swiper.css'
 
@@ -22,15 +22,19 @@ import CKEditor from '@ckeditor/ckeditor5-vue';
 // vee-validate 主套件
 import { Form, Field, ErrorMessage, defineRule, configure } from 'vee-validate';
 import AllRules from '@vee-validate/rules'
-import { localize, setLocale } from '@vee-validate/i18n'
-import zhTW from '@vee-validate/i18n/dist/locale/zh_TW.json'
+import { localize, setLocale } from '@vee-validate/i18n';
+import zhTW from '@vee-validate/i18n/dist/locale/zh_TW.json';
+import emitter from '@/scripts/mitt';
 import $httpMessageState from '@/methods/pushMessageState';
+import fontawesome from '@fortawesome/fontawesome-free/js/all';
+import { pushMessageState, cash } from '@/scripts/methods';
+
 
 import App from './App.vue';
 import router from './router';
 
 // import Alert
-import Alert from './components/Backend/Alert.vue';
+import Alert from './components/Backend/Alert.vue';  
 
 // 初始化Aos
 Aos.init();
@@ -54,13 +58,16 @@ app.config.globalProperties.$filters = {
   date,
   currency,
 };
-
+app.config.globalProperties.$emitter = emitter;
 app.config.globalProperties.$httpMessageState = $httpMessageState;
+app.config.globalProperties.$cash = cash;
+app.config.globalProperties.$pushMessage = pushMessageState;
 
 app.use(router);
 app.use(VueAxios, axios);
 app.use(VueAwesomeSwiper);
 app.use(CKEditor);
+app.use(fontawesome);
 app.component('Loading', Loading);
 app.component('Form', Form);
 app.component('Field', Field);

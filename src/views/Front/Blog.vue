@@ -1,5 +1,5 @@
 <template>
-  <div class="blog div-front-top">
+  <div class="blog">
     <!-- 圖片輪撥 -->
     <!-- <div class="header-img">
       <img src="https://images.unsplash.com/photo-1621252346441-c42a54aa8707?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80" alt="">
@@ -86,18 +86,15 @@
     </div>
     
   </div>
-  <Footer />
 </template>
 
 <script>
-import Footer from '@/components/Footer.vue';
 import ArticlesSwiper from '@/components/ArticlesSwiper.vue';
 
 export default {
   inject: ['emitter', '$httpMessageState'],
   components: {
     ArticlesSwiper,
-    Footer,
   },
   data() {
     return {
@@ -111,6 +108,11 @@ export default {
     this.articleId = this.$route.params.articleId;
     this.getArticle();
     this.getArticles();
+
+    this.emitter.emit('page-loading', true);
+    setTimeout(() => {
+      this.emitter.emit('page-loading', false);
+    }, 1000);
   },
   methods: {
     // 取得文章列表

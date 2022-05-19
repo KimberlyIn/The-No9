@@ -1,56 +1,155 @@
 <template>
-  <div class="main-div d-flex px-4">
-    <div class="col-4 px-3 my-3 text-center flex-grow-1">
-      <div class="item d-flex align-items-center justify-content-evenly">
-        <div class="title">
-          <h1>關於我們</h1>
-          <p class="col-4-p">About Us</p>
-          <router-link to="/about">
-            <button type="button" class="discolor-button">了解更多</button>
-          </router-link>
-        </div>        
-        <img src="https://i.ibb.co/72M3wFL/IMG-3831.jpg" alt="">
+  <div class="index" style="z-index: 0;">
+    <div class="index-container">
+      <div class="index-title">
+        <h1>THE NO.9</h1>
+        <p>In order to be irreplaceable one must always be different.</p>
+      </div>
+
+      <div class="nav">
+        <ul>
+          <li>
+            <router-link class="text-center" to="/about">
+              <h5 class="m-0">關於我們</h5>
+              <p>About Us</p>
+            </router-link>
+          </li>
+          <li>
+            <router-link class="text-center" to="/menu">
+              <h5 class="m-0">精緻皮件</h5>
+              <p>Leather</p>
+            </router-link>
+          </li>
+          <li>
+            <router-link class="text-center" to="/blog">
+              <h5 class="m-0">部落格</h5>
+              <p>Blog</p>
+            </router-link>
+          </li>
+        </ul>
       </div>
     </div>
-    <div class="col-4 px-3 my-3 text-center flex-grow-1">
-      <div class="item d-flex align-items-center justify-content-evenly">
-        <div class="title">
-          <h1 class="text-light">時尚皮藝</h1>
-          <p class="text-light col-4-p">Leather</p>
-          <router-link to="/menu">
-            <button type="button" class="discolor-button-light">了解更多</button>
-          </router-link>
-        </div>        
-        <img src="https://i.ibb.co/MBk9h5z/IMG-6330.jpg" alt="">
-      </div>
+    <div class="index-swiper">
+      <a href="#introduction-leather-coupon" class="toggle-down text-white animate__animated animate__bounce" @click.prevent="toTarget('introduction-leather-coupon')">
+        <i class="bi bi-arrow-down-circle fs-1 text-white"></i>
+      </a>
+      <IndexSwiper/>
     </div>
-    <div class="col-4 px-3 my-3 text-center flex-grow-1">
-      <div class="item d-flex align-items-center justify-content-evenly">
-        <div class="title">
-          <h1>部落格</h1>
-          <p class="col-4-p">Blog</p>
-          <router-link to="/blog">
-            <button type="button" class="discolor-button">了解更多</button>
-          </router-link>
-        </div>        
-        <img src="https://i.ibb.co/8XgfjR2/IMG-4462.jpg" alt="">
+    
+    <div id="introduction-leather-coupon" class="bg">
+      <IntroductionLeatherCoupon />
+    </div>
+    <div class="subscription">
+      <div class="d-flex bg-cover booking text-light flex-column subscription-bg justify-content-center">
+        <div class="d-flex flex-column align-items-center">
+          <p class="col-lg-4 text-center mb-4" style="line-height: 2;">
+            若您購買過我們的商品，認為這是個美好的體驗，並且希望了解 The No.9 更多資訊，歡迎訂閱我們的消息，不會錯過我們的優惠及服務。
+          </p>
+          <Form class="container row g-2 g-md-0 px-5 w-md-60
+            d-md-flex justify-content-md-center"
+            :class="show ? '' : 'd-none d-md-none'"
+            v-slot="{ errors }" @submit="onSubmit" id="subscribe">
+            <p class="col-12 col-md-8 col-lg-4 m-0 me-md-3">
+              <Field type="email" id="email" name="Email"
+              class="form-control ls-2 ms-auto"
+              :class="{ 'is-invalid': errors['Email'] }"
+              :disabled="idDisabled"
+              placeholder="name@example.com"
+              rules="email|required"
+              inputmode="email"
+              v-model="email"></Field>
+              <ErrorMessage name="Email"
+              class="invalid-feedback position-md-absolute">
+              </ErrorMessage>
+            </p>
+            <button type="submit" class="btn btn-primary col-12 col-md-3 col-lg-2"
+            :disabled="idDisabled"
+            @submit="onSubmit">
+              訂閱
+              <Spinner :spin-item="email" />
+            </button> 
+          </Form>
+          <p class="text-warning ls-2 fade" v-if="email" ref="done">
+            {{ email }} 已訂閱電子報 <i class="far fa-check-circle"></i>
+          </p>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import IntroductionLeatherCoupon from '@/components/IntroductionLeatherCoupon.vue';
+import IndexSwiper from '@/components/IndexSwiper.vue';
+import fadeInMix from '@/mixins/FadeInMix.vue';
+import $ from 'jquery';
+
 export default {
-  name: 'Index',
+  components: {
+    IndexSwiper,
+    IntroductionLeatherCoupon,
+  },
+  emits: ['page-loading', 'push-message', 'toggle-spinner'],
+  inject: ['emitter'],
+  mixins: [fadeInMix],
   data() {
     return {
+      promote: [],
+      email: '',
+      idDisabled: false,
+      show: true,
+
+      // Loading物件
+      // loadingStatus: {
+      //   loadingItem: '',
+      // },
+      // tips: {
+      //   data: {
+      //     success: true,
+      //     message: '感謝您的訂閱!',
+      //   },
+      // },
     };
+  },
+  mounted() {
+    this.emitter.emit('page-loading', true);
+    setTimeout(() => {
+      this.emitter.emit('page-loading', false);
+    }, 1000);
+  },
+  methods: {
+    toTarget(target){
+      const gettop=$(`#${target}`).offset().top-0;
+      if (target) {
+        // jquery 將元素頂部動畫到滾動頂部代碼示例
+        $('html,body').animate({ scrollTop: gettop }, 1000);
+      }
+    },
+    onSubmit() {
+      this.idDisabled = true;
+      this.$emitter.emit('toggle-spinner', this.email);
+      setTimeout(() => {
+        this.idDisabled = false;
+        this.$emitter.emit('toggle-spinner', false);
+        this.$refs.done.classList.add('show');
+        this.show = false;
+      }, 1500);
+    },
+    // 訂閱電子信箱
+    // onSubscribe() {
+    //   this.loadingStatus.loadingItem = 'email';
+    //   // 1秒後顯示「訂閱成功!」
+    //   setTimeout(() => {
+    //     this.loadingStatus.loadingItem = '';
+    //     this.$httpMessageState(this.tips, '訂閱');
+    //     this.isVerifyEmail = false;
+    //     this.subscriptionEmail = '';
+    //   }, 1000);
+    // },
+    // // 設定訂閱電子信箱是否驗證
+    // isVerify(verify) {
+    //   this.isVerifyEmail = verify;
+    // },
   },
 };
 </script>
-
-<style>
-.navbar {
-  display: none;
-}
-</style>

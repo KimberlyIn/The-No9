@@ -2,6 +2,8 @@
 $title-color: #212529;
 $text-color: #606060;
 $text-color-9c: #9C9C9C;
+$text-color-60: #605648;
+$bg-color-46: #464646;
 
 
 body {
@@ -9,12 +11,6 @@ body {
 }
 .div-backend-top {
   padding-top: 50px;
-}
-.div-front-top {
-  padding-top: 90px;
-}
-.header {
-  background-color:  #F8F9FA;
 }
 .offcanvas-end {
   width: 350px;
@@ -27,6 +23,9 @@ body {
 }
 .text-color-9c {
   color: $text-color-9c;
+}
+.text-color-60 {
+  color: $text-color-60;
 }
 .close {
   background: none;
@@ -48,7 +47,7 @@ ul {
   padding: 0;
   margin: 0;
 }
-button, .btn, .navbar-toggler {
+.navbar-toggler {
   border: none;
   &:focus {
     outline: none;

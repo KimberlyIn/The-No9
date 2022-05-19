@@ -15,30 +15,48 @@ const routes = [
       {
         path: 'about',
         name: 'About',
+        meta:{
+          istrun:true
+        },
         component: () => import('@/views/Front/About.vue'),
       },
       {
         path: 'menu',
         name: 'Menu',
+        meta:{
+          istrun:true
+        },
         component: () => import('@/views/Front/Menu.vue'),
       },
       {
         path: 'blog',
         name: 'Blog',
+        meta:{
+          istrun:true
+        },
         component: () => import('@/views/Front/Blog.vue'),
       },
       {
         path: 'artivle/:articleId',
+        meta:{
+          istrun:true
+        },
         component: () => import('@/views/Front/BlogArticle.vue'),
       },
       {
         path: 'order',
         name: 'Order',
+        meta:{
+          istrun:true
+        },
         component: () => import('@/views/Front/Order.vue'),
       },
       {
         path: 'product/:productId',
         name: 'product',
+        meta:{
+          istrun:true
+        },
         component: () => import('@/views/Front/product.vue'),
       },
     ],

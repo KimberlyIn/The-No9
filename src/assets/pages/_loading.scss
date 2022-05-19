@@ -1,0 +1,37 @@
+.loading {
+  color: $light;
+  text-transform: uppercase;
+  letter-spacing: .5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bouncebag {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba($dark, .6);
+  z-index: 1400;
+  span {
+    margin-top: .25rem;
+  }
+  .bag {
+    animation: bouncebag .45s cubic-bezier(0, 0, 0.15, 1) alternate infinite;
+  }
+}
+
+@keyframes bouncebag {
+  from {
+    transform: translateY(0) scale(1.5, .8);
+  }
+  to {
+    transform: translateY(-100%) scale(1, 1);
+  }
+}

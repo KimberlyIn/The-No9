@@ -36,23 +36,23 @@
         </div>
         <div class="col-md-6 mobile-top">
           <div class="mb-2 fs-6">
-            <span>首頁</span>
+            <router-link to="/">首頁</router-link>
             &nbsp;/&nbsp;
-            <span>精緻皮革</span>
+            <router-link to="/menu?category=all&page=1">精緻皮件</router-link>
             &nbsp;/&nbsp;
-            <span>手提包</span>
-            <!-- <router-link to="/">首頁</router-link>
-            &nbsp;/&nbsp;
-            <a href="#">精緻皮革</a>
-            &nbsp;/&nbsp;
-            <a href="#">手提包</a> -->
+            <span>{{ product.category }}</span>
           </div>
           <div>
             <h3 class="mb-4 fw-bolder">{{ product.title }}</h3>
             <div class="price mb-4">
-              <div class="fs-3 fw-bold" v-if="!product.id">NT$ {{ product.origin_price }} / {{ product.unit }}</div>
+              <p class="product-price mt-4" v-if="product.price">
+                <span v-if="product.price < product.origin_price">${{ $cash(product.price) }}</span>
+                <small :class="product.price < product.origin_price ? 'del' : ''">$ {{ $cash(product.origin_price) }} NTD</small>
+                <small class="fs-7 ms-2 text-secondary">/ {{ product.unit }}</small>
+              </p>
+              <!-- <div class="fs-3 fw-bold" v-if="!product.id">NT$ {{ product.origin_price }} / {{ product.unit }}</div>
               <del class="fs-6 text-secondary" v-if="product.id">原價 NT$ {{ product.origin_price }}</del>
-              <div class="fs-3 fw-bold" v-if="product.id">NT$ {{ product.price }} / {{ product.unit }}</div>
+              <div class="fs-3 fw-bold" v-if="product.id">NT$ {{ product.price }} / {{ product.unit }}</div> -->
             </div>
             <p class="mb-2 text-secondary">{{ product.description }}</p>
             <p class="mb-5 text-secondary">
@@ -110,24 +110,32 @@
         </div>
       </div>
       <!-- 商品左右換頁 -->
-      <!-- <div class="row mb-5">
+      <div class="row mb-5">
         <div class="prev col-6">
           <div>
-            <button type="button" class="btn btn-outline-secondary rounded-0 py-1 px-5">
+            <button 
+              type="button" 
+              class="btn btn-outline-secondary rounded-0 py-1 px-5"
+              @click="goToProduct(prev_product)"
+            >
               <i class="bi bi-chevron-left"></i>
-              prev 
+              {{ prev_product.title }}
             </button>
           </div>
         </div>
         <div class="next col-6 text-end">
           <div>
-            <button type="button" class="btn btn-outline-secondary rounded-0 py-1 px-5">
-              next
+            <button 
+              type="button" 
+              class="btn btn-outline-secondary rounded-0 py-1 px-5"
+              @click="goToProduct(next_product)"
+            >
+              {{ next_product.title }}
               <i class="bi bi-chevron-right"></i>
             </button>
           </div>
         </div>
-      </div> -->
+      </div>
       <!-- 商品左右換頁 -->
     </div>
     <ProductIllustrate />
@@ -153,12 +161,15 @@ export default {
   data() {
     return {
       product: {},
+      products: [],
       productId: '',
+      category: '',
+      prev_product: {},
+      next_product: {},
       cart: {
         quantity: 1,
       },
       enterImage: '',
-      category: '',
       recProduct: {
         id: 0,
         name: '',
@@ -183,13 +194,30 @@ export default {
     },
   },
   methods: {
+    // 取得所有商品
+    getProducts() {
+      const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/products`;
+      this.isLoading = true;
+      this.$http
+      .get(api)
+      .then((response) => {
+        if(response.data.success) {
+          this.products = response.data.products;
+        } else {
+          this.$httpMessageState(response, '商品取得');
+        }
+      })
+      .catch(() => {
+        this.$httpMessageState(this.tips, '商品清單更新');
+      })
+    },
     // 取得單一商品
     getProduct() {
       const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/product/${this.productId}`;
       this.$http.get(api)
       .then((response)=>{
         if(response.data.success) {
-          this.productId = response.data.product;
+          this.product = response.data.product;
           // 取得單一產品
           const tempItem = { ...response.data.product };
           this.product = { ...tempItem };
@@ -202,6 +230,7 @@ export default {
           // 取得商品圖片
           const { 0: img } = this.product.imagesUrl;
           this.enterImage = img;
+          this.getSiblingProduct(this.products);
         } else {
           // 查無產品時，導向404
           this.$router.push('/product');
@@ -242,12 +271,45 @@ export default {
       this.cart.quantity += 1;
       this.cart.isDash = true;
     },
+    // 取得前後一筆商品
+    getSiblingProduct(datas) {
+      datas.forEach((item, idx) => {
+        const { productId } = item;
+        if (productId === this.id) {
+          const prev = datas[idx - 1] || datas[datas.length - 1];
+          const next = datas[idx + 1] || datas[0];
+          this.prev_product = prev ? { id: prev.id, title: prev.title } : false;
+          this.next_product = next ? { id: next.id, title: next.title } : false;
+        }
+      });
+    },
+    goToProduct(item) {
+      if (!item.id) {
+        return;
+      }
+      this.$router.push(`./${item.id}`);
+    },
+  },
+  watch: {
+    $route() {
+      this.productId = this.$route.params.productId;
+      if (this.productId !== undefined) {
+        this.getProduct();
+      }
+    },
   },
   mounted() {
     // 取得產品ID
     this.productId = this.$route.params.productId;
     // 載入單一產品
     this.getProduct();
+    this.getProducts();
+
+    // loading
+    this.emitter.emit('page-loading', true);
+    setTimeout(() => {
+      this.emitter.emit('page-loading', false);
+    }, 1000);
   },
 };
 </script>

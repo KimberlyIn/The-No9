@@ -1,5 +1,9 @@
 <template>
-  <div class="div-front-top blog-article">
+  <!-- <div class="loading bouncebag" :active="isLoading">
+    <i class="fas fa-2x fa-shopping-bag bag"></i>
+    <span>loading</span>
+  </div> -->
+  <div class="blog-article">
     <div class="header-bg w-100" style="height: 500px; background-color: #C9C9C9;">
       <div class="container bg-white">
         <!-- 精選文章 -->
@@ -78,24 +82,23 @@
 
     
   </div>
-  <Footer />
 </template>
 
 <script>
 import ArticlesSwiper from '@/components/ArticlesSwiper.vue';
-import Footer from '@/components/Footer.vue';
 
 export default {
   components: {
     ArticlesSwiper,
-    Footer,
   },
   data() {
     return {
       article: {},
       articleId: '',
+      isLoading: false,
     };
   },
+  inject: ['emitter'],
   watch: {
     // 監聽 route 參數變化 (切換文章)
     $route() {
@@ -120,6 +123,12 @@ export default {
   created() {
     this.articleId = this.$route.params.articleId;
     this.getArticle();
+
+    this.emitter.emit('page-loading', true);
+    setTimeout(() => {
+      this.emitter.emit('page-loading', false);
+    }, 1000);
+
   },
 }
 </script>

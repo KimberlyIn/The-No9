@@ -1,6 +1,6 @@
 <template>
-  <div class="order-cart div-front-top" v-if="cart.carts">
-    <div class="header w-100 py-5"></div>
+  <div class="order-cart" v-if="cart.carts">
+    <div></div>
     <div>
       <div class="order-header py-5">
         <ul class="d-flex justify-content-center align-items-center">

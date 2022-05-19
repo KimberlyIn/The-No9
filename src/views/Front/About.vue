@@ -1,55 +1,56 @@
 <template>
-  <div class="div-front-top animate__animated animate__fadeIn">
+  <div class="animate__animated animate__fadeIn">
     <div class="about">
-      <div>
-        <img src="https://i.ibb.co/7yssxg4/IMG-3829.png" alt="">
-      </div>
-      <div class="container">
-        <div class="row">
-          <div class="col-6 about-int-col-6">
-            <div class="pb-4">
-              <img src="@/assets/images/logo.gif" alt="TheNo9-LOGO" style="width: 220px;">
-            </div>
-            <div class="text-spac" style="line-height: 26px;">
-              <p>
-                記得當時只是想讓自己的學分快點修滿，於是選了一堂好像有點新奇的課，然後跟著慢慢製作，卻突然的就做出了興趣；某天我把家裡堆滿雜物的倉庫清出一個小角落，一張便宜的桌子和一些簡單的工具，於是 THE NO.9 就這麼開始了。
-                <br/>
-                <br/>
-                皮革很脆弱，因此它的製作是一件極需耐心以及細心的事，這些繁雜的製作過程與步驟可以說是一項都不能少，雖然這過程常常會搞的自己很累，但是完成後真的會很開心也很感動，在享受這樣的心境與過程中，漸漸的做完一件又再繼續下一件，不知不覺也就過了好幾個日子，也累積了一些作品。
-                <br/>
-                <br/>
-                對於皮革我有一些想法，在這裡分享給路過的朋友；皮革和酒一樣，越沉會越香，不論是氣味或者外觀，用的越久越是呈現自然的色澤與紋路，使用起來也是會慢慢的順著我們的使用方式，變的越來越好用，如果有正確的使用習慣，其實皮革是非常耐久與耐用的。另外，我也覺得皮革是一件很美的東西，不論用在哪裡都是那麼賞心悅目，那麼你們怎麼覺得呢？
-                <br/>
-                <br/>
-                我希望，只要自己有時間都能夠繼續的製作皮件，也能夠呈現更多細緻的作品給每一個喜歡皮革的人，就這樣持續我的皮革人生；最後也給予路過的人們一些祝福，祝各位都能走在自己的理想道路上。
+      <div class="about-header-img"></div>
+      <div class="container animate__animated animate__fadeInUp">
+        <div class="row px-3 text-center">
+          <div class="col-12 describe">
+            <div>
+              <h1 class="text-color-60 pb-4">THE NO.9</h1>
+              <p class="pb-5">
+                記得當時只是想讓自己的學分快點修滿，可以爽爽的度過整個大四，於是選了一堂好像有點新奇的課，直到開始跟著慢慢製作，突然做出了興趣。
+                <br>
+                <br>
+                在這個過程中，發現皮革的製作是一件極需耐心的事，因為其實皮革很脆弱，需要繁雜的製作過程與步驟，縫製與雕刻更是需要小心翼翼，雖然這過程常常會搞的自己很累，但是完成後真的是有被自己與這個皮件感動到，於是漸漸的做完一件，又再繼續下一件，然後就這麼開始了製作皮件這件事。
+                <br>
+                <br>
+                我對於皮革的想法是，皮革和酒一樣，越沉會越香，不論是氣味或者外觀，用的越久越是呈現自然的色澤與紋路，使用起來也是會慢慢的順著我們的使用方式，變的越來越好用，如果有正確的使用習慣，其實皮革是非常耐久與耐用的。另外，我也覺得皮革是一件很美的東西，不論用在哪裡都是那麼賞心悅目。
+                <br>
+                <br>
+                我希望只要自己有時間都能夠繼續的製作皮件，讓我的皮革人生可以持續下去。
               </p>
             </div>
-          </div>
-          <div class="col-6 about-img-col-6 d-flex align-items-center">
-            <div>
-              <img src="https://i.ibb.co/dMF4k7v/IMG-2070.png" alt="">
+            <div class="mt-5">
+              <div class="about-middle-img"></div>
             </div>
           </div>
-          <hr class="my-5">
-        </div>
-        
-        <div class="copyright py-5">
-          <h4>版權宣告</h4>
-          <p class="mb-1">THE NO.9 網站 圖片 及 文字 僅供個人作品集使用，不提供轉載、引用及商業用途。</p>
-          <p>圖片來源：THE NO.9、unsplash</p>
+          <div class="col-12">
+            <div class="copyright">
+              <div>
+                <div class="icon-copyright pb-3">
+                  <img src="@/assets/images/icon-copyright.png" alt="" style="width: 50px;">
+                </div>
+                <h3 class="mb-4">版權宣告</h3>
+                <p class="mb-1">THE NO.9 網站 <span class="fw-bold">圖片</span> 及 <span class="fw-bold">文字</span> 僅供個人作品集使用，不提供轉載、引用及商業用途。</p>
+                <p>圖片來源：THE NO.9、unsplash</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-    <Footer />
   </div>
 </template>
 
 <script>
-import Footer from '@/components/Footer.vue';
-
 export default {
-  components: {
-    Footer,
+  inject: ['emitter', '$httpMessageState'],
+  mounted() {
+    this.emitter.emit('page-loading', true);
+    setTimeout(() => {
+      this.emitter.emit('page-loading', false);
+    }, 1000);
   },
 }
 </script>
+

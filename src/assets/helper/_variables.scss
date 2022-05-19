@@ -36,7 +36,7 @@ $grays: (
 // fusv-enable
 
 // scss-docs-start color-variables
-$blue:    #0d6efd !default;
+$blue:    #605648 !default;// #0d6efd !default;
 $indigo:  #6610f2 !default;
 $purple:  #413d49 !default;
 $pink:    #d63384 !default;
@@ -1417,6 +1417,7 @@ $spinner-border-width-sm: .2em !default;
 
 
 // Close
+$close-font-weight:                 $font-weight-bold !default;
 
 // scss-docs-start close-variables
 $btn-close-width:            1em !default;

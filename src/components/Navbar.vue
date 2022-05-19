@@ -1,12 +1,18 @@
 <template>
-<Loading :active="isLoading"></Loading>
-  <div class="fixed-top">
+  <div class="sticky-top" style="z-index: 9;">
     <!-- :class="toggleNav ? 'position-fixed vh-100 overflow-hidden' : ''" -->
-    <nav class="navbar navbar-expand-lg navbar-light py-4 px-4">
+    <nav class="navbar navbar-expand-lg navbar-light" v-show="$route.meta.istrun">
       <div class="container-fluid" > 
-        <router-link class="navbar-brand text-secondary" to="/">
-          <img src="@/assets/images/logo.gif" alt="TheNo9-LOGO" style="width: 160px;" class="me-3" />
-        </router-link>
+        <div class="logo-item">
+          <div class="logo-w">
+            <div>
+              <router-link class="navbar-brand text-secondary" to="/">
+                <img src="@/assets/images/logo.gif" alt="TheNo9-LOGO" style="width: 250px;" class="me-3" />
+              </router-link>
+            </div>
+          </div>
+          <div class="border-r"></div>
+        </div>
         <!-- @click="openNav" -->
         <button 
           class="navbarBtn navbar-toggler" 
@@ -20,12 +26,30 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <!-- :class="toggleNav ? 'show' : ''" -->
-        <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
-          <div class="navbar-nav">
-            <a class="nav-link pe-4" aria-current="page" href="#">首頁</a>
-            <router-link class="nav-link pe-4" to="/menu">精緻皮件</router-link>
-            <router-link class="nav-link pe-4" to="/about">關於我們</router-link>
-            <router-link class="nav-link pe-4" to="/blog">部落格</router-link>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav ">
+            <div>
+              <ul class="navbar-nav align-items-center">
+                <li class="nav-item line-r">
+                  <router-link class="text-center" to="/about">
+                    <h5 class="m-0">關於我們</h5>
+                    <p>About Us</p>
+                  </router-link>
+                </li>
+                <li class="nav-item line-r">
+                  <router-link class="text-center" to="/menu">
+                    <h5 class="m-0">精緻皮件</h5>
+                    <p>Leather</p>
+                  </router-link>
+                </li>
+                <li class="nav-item line-r">
+                  <router-link class="text-center" to="/blog">
+                    <h5 class="m-0">部落格</h5>
+                    <p>Blog</p>
+                  </router-link>
+                </li>
+              </ul>
+            </div>
             <!-- <a 
               class="nav-link"
               data-bs-toggle="modal"
@@ -52,6 +76,8 @@
               </div>
             </div>        -->
             <!-- 搜尋全屏結束 -->
+          </div>
+          <div class="navbar-nav">
             <div class="d-flex me-3 fun-bar">
               <a 
                 href="#"
@@ -109,7 +135,6 @@
                   v-for="item in cart.carts" :key="item.id"
                 >
                   <li class="py-3 d-flex justify-content-between border-bottom">
-
                     <div class="cartBox-img">
                       <a 
                         href="#"
@@ -188,7 +213,6 @@
                     </div> 
                   </li>
                 </ul>        
-
               </div>
               <div 
                 class="offcanvas-footer"
@@ -235,7 +259,6 @@
   </div>
   
 </template>
-
 <script>
 export default {
   data() {
@@ -369,7 +392,6 @@ export default {
   },
 }
 </script>
-
 <style>
 .modal-backdrop.show {
     z-index: 0;

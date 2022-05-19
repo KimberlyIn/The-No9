@@ -1,6 +1,7 @@
+@import "~bootstrap/scss/functions"; //載入套用的變數
+@import './helper/variables';
 @import '~swiper/swiper';
 @import '~bootstrap';
-@import './helper/variables';
 
 
 
@@ -16,4 +17,5 @@
 @import './pages/product'; 
 @import './pages/menu';
 @import './pages/index';
+@import './pages/loading';
 @import './pages/style';

@@ -15,6 +15,7 @@
                 <div class="set-in-center">
                   <!-- 進入商品詳細頁面 -->
                   <a href="#" @click.prevent="viewProduct(product.id)">
+                    <span class="sale" v-if="product.price < product.origin_price">On Sale</span>
                     <div class="title mb-2 fw-bolder">{{ product.title }}</div>
                     <p class="text-secondary">NT$ <span>{{ product.price }}</span> </p>
                   </a>
