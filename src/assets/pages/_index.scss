@@ -21,7 +21,7 @@
     position: absolute;
     top: 6rem;
     left: 10rem;
-    z-index: 9999;
+    z-index: 9;
     .index-title {
       margin-bottom: 25px;
       h1 {
@@ -50,7 +50,35 @@
           color: white;
         }
       }
-      
+      @include media-breakpoint-down(lg) {
+        li {
+          margin: 0 10px;
+        }
+        .blog {
+          padding: 25px 22px;
+        }
+      }
+    }
+  }
+  @include media-breakpoint-down(lg) {
+    .index-container {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      top: 5%;
+      left: 0;
+      .index-title {
+        text-align: center;
+      }
+      .nav {
+        display: flex;
+        justify-content: center;
+      }
+      ul {
+        display: flex;
+        flex-direction: row;
+      }
     }
   }
   .subscription {

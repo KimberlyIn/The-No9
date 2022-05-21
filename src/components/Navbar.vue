@@ -103,7 +103,7 @@
                 <h5 class="offcanvas-title title">訂單清單</h5>
                 <button 
                   type="button"
-                  class="close text-reset"
+                  class="close text-reset border-n"
                   data-bs-dismiss="offcanvas"
                 >
                   <i class="bi bi-x"></i>
@@ -111,7 +111,7 @@
               </div>
               <!-- 判斷購物車裡面有沒有商品 -->
               <div 
-                class="offcanvas-body d-flex flex-column"
+                class="empty-cart offcanvas-body d-flex flex-column"
                 :class="{ 'd-flex justify-content-center': !cart?.carts?.length }"
               >
                 <div 
@@ -205,7 +205,7 @@
                     <div class="product-delete align-self-center">
                       <button 
                         type="button" 
-                        class="close"
+                        class="close border-n"
                         @click="removeCartItem(item.id)"  
                       > 
                         <i class="bi bi-x"></i>

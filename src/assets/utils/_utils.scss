@@ -54,6 +54,12 @@ ul {
     box-shadow: none;
   }
 }
+button, .btn, .navbar-toggler, .form-control {
+  &:focus {
+    outline: none;
+    box-shadow: none;
+  }
+}
 .discolor-button {
   // padding: 12px 45px !important;
   border: none;
@@ -89,4 +95,7 @@ ul {
     height: 100%;
 		object-fit: cover;
 	}
+}
+.border-n {
+  border: none;
 }

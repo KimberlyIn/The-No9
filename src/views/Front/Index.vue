@@ -1,32 +1,33 @@
 <template>
   <div class="index" style="z-index: 0;">
     <div class="index-container">
-      <div class="index-title">
-        <h1>THE NO.9</h1>
-        <p>In order to be irreplaceable one must always be different.</p>
-      </div>
-
-      <div class="nav">
-        <ul>
-          <li>
-            <router-link class="text-center" to="/about">
-              <h5 class="m-0">關於我們</h5>
-              <p>About Us</p>
-            </router-link>
-          </li>
-          <li>
-            <router-link class="text-center" to="/menu">
-              <h5 class="m-0">精緻皮件</h5>
-              <p>Leather</p>
-            </router-link>
-          </li>
-          <li>
-            <router-link class="text-center" to="/blog">
-              <h5 class="m-0">部落格</h5>
-              <p>Blog</p>
-            </router-link>
-          </li>
-        </ul>
+      <div>
+        <div class="index-title">
+          <h1>THE NO.9</h1>
+          <p>In order to be irreplaceable one must always be different.</p>
+        </div>
+        <div class="nav">
+          <ul>
+            <li>
+              <router-link class="text-center" to="/about">
+                <h5 class="m-0">關於我們</h5>
+                <p>About Us</p>
+              </router-link>
+            </li>
+            <li>
+              <router-link class="text-center" to="/menu">
+                <h5 class="m-0">精緻皮件</h5>
+                <p>Leather</p>
+              </router-link>
+            </li>
+            <li class="blog">
+              <router-link class="text-center" to="/blog">
+                <h5 class="m-0">部落格</h5>
+                <p>Blog</p>
+              </router-link>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
     <div class="index-swiper">

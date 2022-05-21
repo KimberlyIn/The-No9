@@ -4,8 +4,12 @@
     <swiper
       :options="swiperOptions"
       :breakpoints="breakpoints"
-      navigation
-      :pagination="{ clickable: true }"
+      :loop="true"
+      :autoplay="{
+        delay: 2500,
+        disableOnInteraction: false,
+        pauseOnMouseEnter: true,
+      }"
     >
       <swiper-slide v-for="article in articles" :key="article.id">
         <ul class="d-flex justify-content-center">
@@ -37,6 +41,9 @@ import { Swiper, SwiperSlide } from 'swiper/vue';
 
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
 
+import Swiper2, {Autoplay} from 'swiper';
+Swiper2.use([Autoplay]);
+
 export default {
   inject: ['emitter', '$httpMessageState'],
   components: {
@@ -53,6 +60,7 @@ export default {
       swiperOptions: {
         pagination: '.swiper-pagination',
       },
+      modules: [Autoplay],
       breakpoints: {
         // 1920: {
         //   slidesPerView: 9,

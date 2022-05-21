@@ -175,6 +175,41 @@
 
 }
 
+// RecProductsCard_Swiper.vue
+.product-component {
+  .pos-rel {
+    position: relative;
+  }
+  h6 {
+    color: $text-color-60;
+  }
+  .del {
+    color: #ACACAC;
+    text-decoration: line-through;
+  }
+  button {
+    border-radius: 0;
+    &:focus {
+      outline: none;
+      box-shadow: none;
+    }
+  }
+  .sale {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    padding: 5px 10px;
+    font-weight: 700;
+    color: #DE8158;
+    background-color: rgba(255, 255, 255, 0.705);
+  }
+  .price {
+    font-size: 20px;
+    font-weight: 700;
+    color: #DE8158;
+  }
+}
+
 @keyframes jump {
   0%, 100% {
     transform: translateY(0) scale(0.8);

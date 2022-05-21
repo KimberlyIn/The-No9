@@ -77,8 +77,8 @@
                   >
                     <th class="text-center" width="200">
                       <button 
-                        type="button" 
-                        class="close"
+                        type="button"
+                        class="close border-n"
                         @click="removeCartItem(item.id)"  
                       >
                         <i class="bi bi-x"></i>
@@ -520,7 +520,7 @@
 
             <!-- 訂單完成 order-received -->
             <div 
-              class="order-received mt-3"
+              class="order-received"
               v-if="stepStatus.orderReceived"
             >
               <div class="row flex-column align-items-center text-center">
@@ -553,10 +553,7 @@
 </template>
 
 <script type="module">
-// let navCartBtn;
-// let floatingCartBtn;
-// let isFirst = true;
-// import navBar from '@/components/Navbar.vue';
+
 export default {
   inject: ['emitter', '$httpMessageState'],
   data() {
@@ -590,7 +587,7 @@ export default {
         if(res.data.success) {
           this.cart = res.data.data;
         } else {
-          alert(res.data.message);
+          this.$httpMessageState(res, '加入購物車');
         }
       })
       .catch((error) => {
@@ -653,10 +650,11 @@ export default {
       this.$http.delete(api)
       .then((res) => {
         if(res.data.success) {
-          alert(res.data.message);
           this.inTheCart();
+          this.emitter.emit('get-cart');
+          this.$httpMessageState(res, '刪除單一商品');
         } else {
-          alert(res.data.message);
+          this.$httpMessageState(res, '刪除單一商品');
         }
       })
       .catch((err) => {
@@ -669,10 +667,11 @@ export default {
       this.$http.delete(api)
       .then((res) => {
         if(res.data.success) {
-          alert(res.data.message);
           this.inTheCart();
+          this.emitter.emit('get-cart');
+          this.$httpMessageState(res, '清空購物車');
         } else {
-          alert(res.data.message);
+          this.$httpMessageState(res, '清空購物車');
         }
       })
     },
@@ -744,6 +743,11 @@ export default {
   },
   mounted() {
     this.inTheCart();
+
+    this.emitter.emit('page-loading', true);
+    setTimeout(() => {
+      this.emitter.emit('page-loading', false);
+    }, 1000);
   },
 }
 </script>

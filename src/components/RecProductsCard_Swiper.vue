@@ -1,35 +1,67 @@
 <template>
+  <h2 class="fs-4 my-5">你可能會喜歡的商品....</h2>
   <div class="pt-3 pb-5">
     <swiper
-      :options="swiperOptions"
-      :breakpoints="breakpoints"
-      navigation
-      :pagination="{ clickable: true }"
+      class="products p-0 mb-5 "
+      ref="swiper"
+      :breakpoints="{
+        '640': {
+          slidesPerView: 1,
+          spaceBetween: 0,
+        },
+        '768': {
+          slidesPerView: 2,
+          spaceBetween: 30,
+        },
+        '1024': {
+          slidesPerView: 3,
+          spaceBetween: 30,
+        },
+      }"
+      :loop="true"
+      :autoplay="{
+        delay: 2500,
+        disableOnInteraction: false,
+        pauseOnMouseEnter: true,
+      }"
     >
-      <swiper-slide v-for="product in filterProducts" :key="product.id">
-        <div class="res-product">
-          <ul class="d-flex flex-grow-1">
-            <li class="d-flex flex-grow-1" style="width: 279px; height: 350px;">
-              <img :src="product.imageUrl" alt="">
-              <div class="menu-detail">
-                <div class="set-in-center">
-                  <!-- 進入商品詳細頁面 -->
-                  <a href="#" @click.prevent="viewProduct(product.id)">
-                    <span class="sale" v-if="product.price < product.origin_price">On Sale</span>
-                    <div class="title mb-2 fw-bolder">{{ product.title }}</div>
-                    <p class="text-secondary">NT$ <span>{{ product.price }}</span> </p>
-                  </a>
-                </div>
-                <button 
-                  type="button"
-                  @click.prevent="getCart(product.id)"
+      <swiper-slide v-for="product in products" :key="product.id">
+        <div class="product-component">
+          <div class="pos-rel">
+            <a href="#" @click.prevent="viewProduct(product.id)">
+              <span class="sale" v-if="product.price < product.origin_price">On Sale !!</span>
+              <div
+                style="height: 300px; background-size: cover; background-position: center"
+                :style="{backgroundImage: `url(${product.imageUrl})`}"
                 >
-                  <i class="bi bi-plus fs-1 text"></i>
-                </button>
               </div>
-            </li>
-          </ul>
-        </div>
+            </a>
+          </div>
+          <div class="text-center my-4">
+            <h6 class="fw-bold">{{ product.title }}</h6>
+            <div>
+              <div class="fs-5">
+                <small :class="product.price < product.origin_price ? 'del' : ''"
+                  >$ {{ $cash(product.origin_price) }} NTD</small
+                >
+              </div>
+              <div class="price mb-3">
+                <span v-if="product.price < product.origin_price"
+                  >$ {{ $cash(product.price) }}&nbsp;</span
+                >
+              </div>
+            </div>
+            <div>
+              <button
+                type="button"
+                class="btn btn-outline-primary mb-4"
+                @click.prevent="getCart(product.id)"
+              >
+                加入購物車
+              </button>
+            </div>
+          </div>
+        </div> 
       </swiper-slide>
       <div class="swiper-pagination"></div>
     </swiper>
@@ -43,6 +75,10 @@ import SwiperCore, {
 import { Swiper, SwiperSlide } from 'swiper/vue';
 
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
+
+import Swiper2, {Autoplay} from 'swiper';
+Swiper2.use([Autoplay]);
+
 export default {
   components: {
     Swiper,
@@ -87,28 +123,7 @@ export default {
       recStr: '手提包',
       // 產品數量
       productCount: 1,
-      // Swiper
-      swiperOptions: {
-        pagination: '.swiper-pagination',
-      },
-      breakpoints: {
-        1200: {
-          slidesPerView: 4,
-          spaceBetween: 20,
-        },
-        768: {
-          slidesPerView: 3,
-          spaceBetween: 20,
-        },
-        480: {
-          slidesPerView: 2,
-          spaceBetween: 10,
-        },
-        320: {
-          slidesPerView: 1,
-          spaceBetween: 10,
-        },
-      },
+      modules: [Autoplay],
     };
   },
   inject: ['emitter', '$httpMessageState'],
@@ -174,10 +189,10 @@ export default {
       .post(api, { data: cart })
       .then((response) => {
         if(response.data.success){
-          alert(response.data.message);
+          this.$httpMessageState(response, '加入購物車');
           this.emitter.emit('get-cart');
         } else {
-          alert(response.data.message);
+          this.$httpMessageState(response, '加入購物車');
         }
       })
     },

@@ -1,5 +1,5 @@
 <template>
-  <div class="toast-container position-fixed end-0 float-end" style="z-index: 1500;top:65px">
+  <div class="toast-container position-fixed end-0 float-end" style="z-index: 1500;top: 128px">
     <div v-for="(msg, key) in messages" :key="key" class="toast show" role="alert">
       <div class="toast-header bg-light text-white" style="height:50px;">
         <!-- <span :class="`bg-${msg.style}`" class="p-2 rounded me-2 d-inline-block"></span> -->
@@ -10,7 +10,7 @@
         <strong class="me-auto text-muted fw-normal" style="font-size:1rem;">{{ msg.title }}</strong>
         <button
           type="button"
-          class="close"
+          class="close border-n"
           @click="clearToast(key)"
         >
           <i class="bi bi-x"></i>

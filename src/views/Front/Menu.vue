@@ -9,6 +9,7 @@
           <div class="pos-rel">
             <div
               class="nav-icons me-2 d-none d-md-block"
+              style="z-index: 1;"
             >
               <div class="nav-search rounded-pill"
                 :class="isFocus ? 'expand' : ''">
@@ -80,14 +81,14 @@
             <div class="text-center my-4">
               <h6 class="fw-bold">{{ item.title }}</h6>
               <div>
-                <div>
+                <div class="fs-5">
                   <small :class="item.price < item.origin_price ? 'del' : ''"
-                    >原價 ${{ $cash(item.origin_price) }} NTD</small
+                    >$ {{ $cash(item.origin_price) }} NTD</small
                   >
                 </div>
                 <div class="price mb-3">
                   <span v-if="item.price < item.origin_price"
-                    >${{ $cash(item.price) }}&nbsp;</span
+                    >$ {{ $cash(item.price) }}&nbsp;</span
                   >
                 </div>
               </div>

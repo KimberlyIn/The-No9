@@ -48,7 +48,7 @@
               <p class="product-price mt-4" v-if="product.price">
                 <span v-if="product.price < product.origin_price">${{ $cash(product.price) }}</span>
                 <small :class="product.price < product.origin_price ? 'del' : ''">$ {{ $cash(product.origin_price) }} NTD</small>
-                <small class="fs-7 ms-2 text-secondary">/ {{ product.unit }}</small>
+                <small class="fs-6 ms-2 text-secondary">/ {{ product.unit }}</small>
               </p>
               <!-- <div class="fs-3 fw-bold" v-if="!product.id">NT$ {{ product.origin_price }} / {{ product.unit }}</div>
               <del class="fs-6 text-secondary" v-if="product.id">原價 NT$ {{ product.origin_price }}</del>
@@ -95,7 +95,7 @@
               </div>
               <div class="col-6">
                 <button 
-                  class="btn btn-lg rounded-0 fs-6"
+                  class="btn-cart btn-lg rounded-0 fs-6 border-n"
                   type="button"
                   @click="addToCart"
                 >
@@ -115,7 +115,7 @@
           <div>
             <button 
               type="button" 
-              class="btn btn-outline-secondary rounded-0 py-1 px-5"
+              class="btn btn-outline-secondary rounded-0 py-2 px-3"
               @click="goToProduct(prev_product)"
             >
               <i class="bi bi-chevron-left"></i>
@@ -127,7 +127,7 @@
           <div>
             <button 
               type="button" 
-              class="btn btn-outline-secondary rounded-0 py-1 px-5"
+              class="btn btn-outline-secondary rounded-0 py-2 px-3"
               @click="goToProduct(next_product)"
             >
               {{ next_product.title }}
@@ -141,13 +141,11 @@
     <ProductIllustrate />
     <div class="container">
       <div class="pt-5">
-        <h4>你可能會喜歡的商品.....</h4>
         <div>
           <RecProductsCardSwiper :limitCount="999" :filterProduct="recProduct" />
         </div>
       </div>
     </div>
-    <Footer />
   </div>
 </template>
 
@@ -155,7 +153,6 @@
 <script>
 import ProductIllustrate from '@/components/ProductIllustrate.vue';
 import RecProductsCardSwiper from '@/components/RecProductsCard_Swiper.vue';
-import Footer from '@/components/Footer.vue';
 
 export default {
   data() {
@@ -181,7 +178,6 @@ export default {
   components: {
     ProductIllustrate,
     RecProductsCardSwiper,
-    Footer,
   },
   watch: {
     // 監聽 route 參數變化 (切換推薦產品)
@@ -249,8 +245,8 @@ export default {
         qty: this.cart.quantity,
       };
       this.$http.post(api, { data: cart })
-      .then(() => {
-        alert('已加入購物車')
+      .then((response) => {
+        this.$httpMessageState(response, '加入購物車');
         this.cart.quantity = 1;
         // 取得訂單清單
         this.emitter.emit('get-cart');
@@ -274,20 +270,20 @@ export default {
     // 取得前後一筆商品
     getSiblingProduct(datas) {
       datas.forEach((item, idx) => {
-        const { productId } = item;
-        if (productId === this.id) {
+        const { id } = item;
+        if (id === this.productId) {
           const prev = datas[idx - 1] || datas[datas.length - 1];
           const next = datas[idx + 1] || datas[0];
-          this.prev_product = prev ? { id: prev.id, title: prev.title } : false;
-          this.next_product = next ? { id: next.id, title: next.title } : false;
+          this.prev_product = prev ? { productId: prev.id, title: prev.title } : false;
+          this.next_product = next ? { productId: next.id, title: next.title } : false;
         }
       });
     },
     goToProduct(item) {
-      if (!item.id) {
+      if (!item.productId) {
         return;
       }
-      this.$router.push(`./${item.id}`);
+      this.$router.push(`./${item.productId}`);
     },
   },
   watch: {
