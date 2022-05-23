@@ -28,7 +28,7 @@
 
     <div style="background-color: #605648;">
       <div class="container">
-        <div class="row">
+        <div class="row row-brown">
           <div 
             class="col-6 d-flex justify-content-center align-items-center"
             data-aos="fade-up"

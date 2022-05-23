@@ -4,26 +4,26 @@
       <div>
         <div class="index-title">
           <h1>THE NO.9</h1>
-          <p>In order to be irreplaceable one must always be different.</p>
+          <p class="letter-spacing-2">In order to be irreplaceable one must always be different.</p>
         </div>
         <div class="nav">
           <ul>
             <li>
               <router-link class="text-center" to="/about">
-                <h5 class="m-0">關於我們</h5>
-                <p>About Us</p>
+                <h5 class="m-0 letter-spacing-2">關於我們</h5>
+                <p class="letter-spacing-2">About Us</p>
               </router-link>
             </li>
             <li>
               <router-link class="text-center" to="/menu">
-                <h5 class="m-0">精緻皮件</h5>
-                <p>Leather</p>
+                <h5 class="m-0 letter-spacing-2">精緻皮件</h5>
+                <p class="letter-spacing-2">Leather</p>
               </router-link>
             </li>
             <li class="blog">
               <router-link class="text-center" to="/blog">
-                <h5 class="m-0">部落格</h5>
-                <p>Blog</p>
+                <h5 class="m-0 letter-spacing-2">部落格</h5>
+                <p class="letter-spacing-2">Blog</p>
               </router-link>
             </li>
           </ul>
@@ -43,14 +43,14 @@
     <div class="subscription">
       <div class="d-flex bg-cover booking text-light flex-column subscription-bg justify-content-center">
         <div class="d-flex flex-column align-items-center">
-          <p class="col-lg-4 text-center mb-4" style="line-height: 2;">
+          <p class="subscription-text col-lg-4 text-center mb-4" style="line-height: 2;">
             若您購買過我們的商品，認為這是個美好的體驗，並且希望了解 The No.9 更多資訊，歡迎訂閱我們的消息，不會錯過我們的優惠及服務。
           </p>
           <Form class="container row g-2 g-md-0 px-5 w-md-60
             d-md-flex justify-content-md-center"
             :class="show ? '' : 'd-none d-md-none'"
             v-slot="{ errors }" @submit="onSubmit" id="subscribe">
-            <p class="col-12 col-md-8 col-lg-4 m-0 me-md-3">
+            <p class="input-p col-12 col-md-8 col-lg-4 m-0 me-md-3">
               <Field type="email" id="email" name="Email"
               class="form-control ls-2 ms-auto"
               :class="{ 'is-invalid': errors['Email'] }"
