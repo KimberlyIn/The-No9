@@ -145,7 +145,7 @@
                     <div class="product-delete pe-4 align-self-center">
                       <button 
                         type="button" 
-                        class="close"
+                        class="close border-n"
                         @click="removeCartItem(item.id)"  
                       > 
                         <i class="bi bi-x"></i>

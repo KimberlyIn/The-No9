@@ -1,6 +1,5 @@
 <template>
   <div class="product div-front-top">
-    <div class="header w-100 py-5"></div>
     <div class="container pt-5">
       <div class="row pb-5">
         <div class="col-md-6 col-md-6-carousel" v-if="product.id">
@@ -34,7 +33,7 @@
             <!-- 商品圖片 -->
           </div>
         </div>
-        <div class="col-md-6 mobile-top">
+        <div class="mobile-product col-md-6 mobile-top">
           <div class="mb-2 fs-6">
             <router-link to="/">首頁</router-link>
             &nbsp;/&nbsp;
@@ -54,8 +53,8 @@
               <del class="fs-6 text-secondary" v-if="product.id">原價 NT$ {{ product.origin_price }}</del>
               <div class="fs-3 fw-bold" v-if="product.id">NT$ {{ product.price }} / {{ product.unit }}</div> -->
             </div>
-            <p class="mb-2 text-secondary">{{ product.description }}</p>
-            <p class="mb-5 text-secondary">
+            <p class="mb-2 letter-spacing-1 text-secondary">・ {{ product.description }}</p>
+            <p class="mb-5 letter-spacing-1 line-height-2 text-secondary">
               {{ product.content }}
             </p>
           </div>

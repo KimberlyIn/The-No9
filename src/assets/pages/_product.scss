@@ -28,16 +28,6 @@
       border-color: #b6b6b6;
     }
   }
-  @include media-breakpoint-down(sm) {
-    .get-cart {
-      .col-4-input {
-        height: 54px;
-        .form-control {
-          width: 100%;
-        }
-      }
-    }
-  }
   .col-6 {
     .btn-cart {
       padding: 13px 65px;
@@ -49,19 +39,7 @@
       }
     }
   }
-  @include media-breakpoint-down(sm) {
-    .get-cart {
-      .col-6 {
-        width: 100%;
-        button {
-          width: 100%;
-          margin-top: 20px;
-        }
-      }
-    }
-  }
 }
-
 
 .product-price {
   span {
@@ -76,6 +54,35 @@
       color: $secondary;
       font-size: 1rem;
       text-decoration: line-through;
+    }
+  }
+}
+
+@include media-breakpoint-down(md) {
+  .mobile-product {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    .get-cart {
+      .col-4 {
+        width: 100%;
+        justify-content: space-between;
+        .input-group-prepend {
+          width: 100%;
+        }
+        .form-control {
+          width: 100%;
+          text-align: center;
+        }
+      }
+      .col-6 {
+        width: 100%;
+        button {
+          width: 100%;
+          margin-top: 20px;
+        }
+      }
     }
   }
 }

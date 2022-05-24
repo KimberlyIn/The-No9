@@ -53,9 +53,19 @@
         }
       }
     }
+    @include media-breakpoint-down(lg) {
+      .nav-item {
+        padding: 20px;
+      }
+    }
     .empty-cart {
       button {
         padding: 10px 35px;
+      }
+      @include media-breakpoint-down(sm) {
+        button {
+          padding: 10px 10px;
+        }
       }
     }
     .dropdown-toggle {

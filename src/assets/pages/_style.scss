@@ -3,6 +3,11 @@
   .col-12 {
     padding: 0 100px 100px 100px;
   }
+  @include media-breakpoint-down(md) {
+    .col-12 {
+      padding: 0 30px 50px 30px;
+    }
+  }
   h1 {
     color: $text-color-60;
   }

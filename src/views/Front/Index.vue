@@ -38,7 +38,9 @@
       >
         <i class="bi bi-arrow-down-circle fs-1 text-white"></i>
       </a>
-      <IndexSwiper/>
+      <div>
+        <IndexSwiper/>
+      </div>
     </div>
     
     <div id="introduction-leather-coupon" class="bg">

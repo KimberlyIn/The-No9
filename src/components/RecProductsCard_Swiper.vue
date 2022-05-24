@@ -1,5 +1,5 @@
 <template>
-  <h2 class="fs-4 my-5">你可能會喜歡的商品....</h2>
+  <h2 class="fs-4">你可能會喜歡的商品....</h2>
   <div class="pt-3 pb-5">
     <swiper
       class="products p-0 mb-5 "

@@ -208,7 +208,7 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup" :class="toggleNav ? 'show' : ''">
-          <div class="navbar-nav ">
+          <div class="navbar-nav">
             <div>
               <ul class="navbar-nav align-items-center">
                 <li class="nav-item line-r">

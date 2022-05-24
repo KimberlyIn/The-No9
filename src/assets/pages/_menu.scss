@@ -5,6 +5,11 @@
       padding-bottom: 20px;
       color: #605648;
     }
+    @include media-breakpoint-down(sm) {
+      h5 {
+        text-align: center;
+      }
+    }
   }
   .pos-rel {
     position: relative;
@@ -31,7 +36,9 @@
     }
     .cart-bag {
       transform: scale(1.1);
-      +media-breakpoint-up(md) {
+    }
+    @include media-breakpoint-down(md) {
+      .cart-bag {
         transform: scale(1);
       }
     }
@@ -172,7 +179,12 @@
     }
     
   }
-
+  @include media-breakpoint-down(sm) {
+    .product-category {
+      display: flex;
+      justify-content: center;
+    }
+  }
 }
 
 // RecProductsCard_Swiper.vue
