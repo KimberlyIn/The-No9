@@ -31,7 +31,11 @@
       </div>
     </div>
     <div class="index-swiper">
-      <a href="#introduction-leather-coupon" class="toggle-down text-white animate__animated animate__bounce" @click.prevent="toTarget('introduction-leather-coupon')">
+      <a 
+        href="#introduction-leather-coupon" 
+        class="toggle-down text-white animate__animated animate__bounce" 
+        @click.prevent="toTarget('introduction-leather-coupon')"
+      >
         <i class="bi bi-arrow-down-circle fs-1 text-white"></i>
       </a>
       <IndexSwiper/>

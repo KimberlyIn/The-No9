@@ -1,6 +1,7 @@
 <template>
   <div class="sticky-top" style="z-index: 9;">
     <!-- :class="toggleNav ? 'position-fixed vh-100 overflow-hidden' : ''" -->
+    
     <nav 
       class="navbar navbar-expand-lg navbar-light" 
       v-show="$route.meta.istrun"
@@ -11,7 +12,7 @@
           <div class="logo-w">
             <div>
               <router-link class="navbar-brand text-secondary" to="/">
-                <img src="@/assets/images/logo.gif" alt="TheNo9-LOGO" style="width: 250px;" class="me-3" />
+                <img src="@/assets/images/logo.gif" alt="TheNo9-LOGO" class="me-3" />
               </router-link>
             </div>
           </div>
@@ -20,7 +21,7 @@
 
         <!-- 手機版 -->
         <div class="cart-icon navbar-nav d-block d-lg-none">
-          <div class="d-flex me-3 fun-bar ">
+          <div class="d-flex">
             <a 
               href="#"
               id="nav-cart-btn"
@@ -243,8 +244,8 @@
               </ul>
             </div>
           </div>
-          <div class="navbar-nav d-none d-lg-block">
-            <div class="d-flex me-3 fun-bar ">
+          <div class="icon-bi-cart navbar-nav d-none d-lg-block">
+            <div class="d-flex">
               <a 
                 href="#"
                 id="nav-cart-btn"

@@ -116,7 +116,7 @@
   }
   .coupon-about {
     padding: 100px 0 0 0;
-    span {
+    .span-bor {
       padding: 20px 20px;
       border: 1px solid #605648;
       font-size: 20px;
@@ -152,6 +152,9 @@
       .col-5 {
         width: 100%;
       }
+    }
+    .container {
+      padding: 0 20px;
     }
   }
 }
