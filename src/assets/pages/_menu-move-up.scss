@@ -146,6 +146,7 @@
       top: 15px;
       left: 15px;
       padding: 5px 10px;
+      font-weight: 700;
       color: #DE8158;
       background-color: rgba(255, 255, 255, 0.705);
     }
@@ -154,35 +155,78 @@
       font-weight: 700;
       color: #DE8158;
     }
-    .product-img {
-      overflow: hidden;
+    .products-img {
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center 60%;
+      height: 280px;
+      transition: all .3s ease-in-out;
       position: relative;
-      &:hover{
-        .dark-bg {
-          opacity: 1;
-          padding-bottom: 15px;
+      overflow: hidden;
+      &::after {
+        content: '';
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba($dark, .15);
+        opacity: 0;
+        transition: all .3s ease-in-out;
+      }
+      .sale {
+        position: absolute;
+        right: 0;
+        background: $light;
+        color: $dark;
+        padding: .5rem 1rem;
+        margin: 1rem;
+        font-size: .875rem;
+        font-weight: 500;
+        color: $red-300;
+        z-index: 2;
+      }
+      small, button {
+        position: absolute;
+        left: 50%;
+        bottom: 0;
+        transform: translate(-50%, 0);
+        width: calc(100% - 2rem);
+        background: $white;
+        color: $primary;
+        padding: 1rem;
+        margin: 1rem 0;
+        text-align: center;
+        box-shadow: 0 2px 6px rgba($dark, .1);
+        text-transform: uppercase;
+        font-size: .875rem;
+        transition: all .3s ease-out;
+        z-index: 2;
+      }
+    }
+    @include media-breakpoint-down(md) {
+      .product-img {
+        background-position: center 70%;
+        height: 300px;
+        small {
+          transform: translate(-50%, 10%);
+          opacity: 0;
+        }
+        &:hover {
+          &::after {
+            opacity: 1;
+          }
+          small {
+            opacity: 1;
+            transform: translate(-50%, 0);
+          }
         }
       }
     }
-    .dark-bg {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding-top: 12rem;
-      background-color: rgba(5, 5, 5, 0.103);
-      transition: all 0.3s ease-in-out;
-      opacity: 0;
-      small {
-        position: absolute;
-        color: rgb(54, 54, 54);
-        background-color: white;
-      }
-    }
+    
+
+
 
     // Menu-zoom-effect.vue
     // .product-img {
@@ -268,6 +312,15 @@
       box-shadow: none;
     }
   }
+  .sale {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    padding: 5px 10px;
+    font-weight: 700;
+    color: #DE8158;
+    background-color: rgba(255, 255, 255, 0.705);
+  }
   .price {
     font-size: 20px;
     font-weight: 700;
@@ -288,87 +341,14 @@
 }
 
 
-
-
-
-
-// .product-img {
-//   background-repeat: no-repeat;
-//   background-size: cover;
-//   background-position: center 60%;
-//   height: 280px;
-//   transition: all .3s ease-in-out;
-//   position: relative;
-//   overflow: hidden;
-//   &::after {
-//     content: '';
-//     display: block;
-//     position: absolute;
-//     left: 0;
-//     top: 0;
-//     width: 100%;
-//     height: 100%;
-//     background: rgba($dark, .15);
-//     opacity: 0;
-//     transition: all .3s ease-in-out;
-//   }
-//   .sale {
-//     position: absolute;
-//     right: 0;
-//     background: $light;
-//     color: $dark;
-//     padding: .5rem 1rem;
-//     margin: 1rem;
-//     font-size: .875rem;
-//     font-weight: 500;
-//     color: $red-300;
-//     z-index: 2;
-//   }
-//   small, button {
-//     position: absolute;
-//     left: 50%;
-//     bottom: 0;
-//     transform: translate(-50%, 0);
-//     width: calc(100% - 2rem);
-//     background: $white;
-//     color: $primary;
-//     padding: 1rem;
-//     margin: 1rem 0;
-//     text-align: center;
-//     box-shadow: 0 2px 6px rgba($dark, .1);
-//     text-transform: uppercase;
-//     font-size: .875rem;
-//     transition: all .3s ease-out;
-//     z-index: 2;
-//   }
-//   @include media-breakpoint-down(md) {
-//     .product-img {
-//       background-position: center 70%;
-//       height: 300px;
-//       small {
-//         transform: translate(-50%, 10%);
-//         opacity: 0;
-//       }
-//       &:hover {
-//         &::after {
-//           opacity: 1;
-//         }
-//         small {
-//           opacity: 1;
-//           transform: translate(-50%, 0);
-//         }
-//       }
-//     }
-//   }
-// }
-// .fade-out {
-//   opacity: 0;
-//   transform: translateY(10%);
-//   transition: all 1s;
-// }
-// .fade-in {
-//   opacity: 1;
-//   transform: translateY(0%);
-//   transition: all 1s;
-//   transition-delay: .25s;
-// }
+.fade-out {
+  opacity: 0;
+  transform: translateY(10%);
+  transition: all 1s;
+}
+.fade-in {
+  opacity: 1;
+  transform: translateY(0%);
+  transition: all 1s;
+  transition-delay: .25s;
+}

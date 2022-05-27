@@ -146,6 +146,7 @@
       top: 15px;
       left: 15px;
       padding: 5px 10px;
+      font-weight: 700;
       color: #DE8158;
       background-color: rgba(255, 255, 255, 0.705);
     }
@@ -154,36 +155,6 @@
       font-weight: 700;
       color: #DE8158;
     }
-    .product-img {
-      overflow: hidden;
-      position: relative;
-      &:hover{
-        .dark-bg {
-          opacity: 1;
-          padding-bottom: 15px;
-        }
-      }
-    }
-    .dark-bg {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding-top: 12rem;
-      background-color: rgba(5, 5, 5, 0.103);
-      transition: all 0.3s ease-in-out;
-      opacity: 0;
-      small {
-        position: absolute;
-        color: rgb(54, 54, 54);
-        background-color: white;
-      }
-    }
-
     // Menu-zoom-effect.vue
     // .product-img {
     //   position: relative;
@@ -267,6 +238,15 @@
       outline: none;
       box-shadow: none;
     }
+  }
+  .sale {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    padding: 5px 10px;
+    font-weight: 700;
+    color: #DE8158;
+    background-color: rgba(255, 255, 255, 0.705);
   }
   .price {
     font-size: 20px;

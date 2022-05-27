@@ -1,16 +1,18 @@
 <template>
-  <div>
+  <div class="login" style="background-color: rgb(236, 236, 236);">
     <!-- <Loading :active="isLoading" :z-index="1060"></Loading> -->
     <ToastMessages></ToastMessages>
     <div class="container vh-100">
-      <router-link class="navbar-brand text-secondary" to="/">
-        <img src="@/assets/images/logo.gif" alt="TheNo9-LOGO" style="width: 160px;" class="me-3" />
-      </router-link>
       <form 
         class="form-floating row h-100 align-items-center justify-content-center"
         @submit.prevent="login"
       >
         <div class="col-md-5">
+          <div class="d-flex justify-content-center mb-3">
+            <router-link class="navbar-brand text-secondary" to="/">
+              <img src="@/assets/images/logo.gif" alt="TheNo9-LOGO" style="width: 160px;"/>
+            </router-link>
+          </div>
           <div class="h3 mb-4 text-center">請先登入</div>
           <div class="mb-3">
             <label for="floatingInputInvalid">Email address</label>

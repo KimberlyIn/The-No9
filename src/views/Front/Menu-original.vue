@@ -69,18 +69,14 @@
         <div class="product-col row row-cols-1 row-cols-md-2 row-cols-lg-3">
           <div class="col" v-for="item in filterDatas" :key="item.id">
             <div 
-              class="pos-rel product-img"
+              class="pos-rel"
               style="height: 300px; background-size: cover; background-position: center"
               :style="{backgroundImage: `url(${item.imageUrl})`}"
               @click.prevent="viewProduct(item.id)"
               role="button"
             >
-              <div class="dark-bg">
-                <small class="px-2 py-2">查看內容</small>
-                <!-- <button class="px-5 me-2">查看商品</button> -->
-              </div>
               <span class="sale" v-if="item.price < item.origin_price">On Sale !!</span>
-              
+              <!-- <small>查看內容</small> -->
             </div>
             <div class="text-center my-4">
               <h6 class="fw-bold">{{ item.title }}</h6>

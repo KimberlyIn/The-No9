@@ -24,9 +24,9 @@
               <th>標題</th>
               <th>作者</th>
               <th>描述</th>
-              <th>建立時間</th>
-              <th>是否公開</th>
-              <th>編輯</th>
+              <th width="120">建立時間</th>
+              <th width="120">是否公開</th>
+              <th width="120">編輯</th>
             </tr>
           </thead>
           <tbody>
