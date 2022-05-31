@@ -51,7 +51,7 @@
     
     <!-- :pages="pagination" 外層 Products.vue 的 pagination 傳遞 data 到內層 Pagination.vue 並自定義名稱為 pages -->
     <!-- @emit-page="getProducts" 內層 Pagination.vue 用 emit 觸發外層 Products.vue 的 getProducts，且自訂義名稱為 emit-page -->
-    <Pagination :pages="pagination" @emit-pages="getProducts"></Pagination>
+    <Pagination :pages="pagination" @get-datas="getProducts"></Pagination>
     <CreateProduct :product="tempProduct" :isNew="isNew" @update-product="updateProduct" ref="createProduct"/>
 
     <DeleteProduct :item="tempProduct" ref="deleteProduct" @del-product="delProduct"></DeleteProduct>
@@ -59,7 +59,7 @@
 </template>
 
 <script>
-import Pagination from '@/components/Backend/Pagination.vue';
+import Pagination from '@/components/Pagination.vue';
 import CreateProduct from '@/components/Backend/CreateProduct.vue';
 import DeleteProduct from '@/components/Backend/DeleteProduct.vue';
 

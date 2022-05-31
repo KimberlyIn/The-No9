@@ -72,12 +72,12 @@
       </table>
       <OrderModal :order="tempOrder" @update-order="updateOrder" ref="orderModal"></OrderModal>
       <DeleteProduct :item="tempOrder" @del-product="delOrder" ref="deleteProduct"></DeleteProduct>
-      <Pagination :pages="pagination" @emitPages="getOrders"></Pagination>
+      <Pagination :pages="pagination" @get-datas="getOrders"></Pagination>
   </div>
 </template>
 
 <script>
-import Pagination from '@/components/Backend/Pagination.vue';
+import Pagination from '@/components/Pagination.vue';
 import OrderModal from '@/components/Backend/OrderModal.vue';
 import DeleteProduct from '@/components/Backend/DeleteProduct.vue';
 

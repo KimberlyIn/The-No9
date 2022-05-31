@@ -162,7 +162,7 @@ export default {
   methods: {
     // 取得所有商品
     getProducts() {
-      const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/products`;
+      const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/products/all`;
       this.isLoading = true;
       this.$http
       .get(api)
@@ -210,7 +210,7 @@ export default {
       // 比較後的結果再賦予到 isActive
       this.isActive = this.path.category;
     },
-    filterProducts(page) {
+    filterProducts(page = 1) {
       this.getPath();
       if (this.path.category === 'all') {
         this.tempArry = this.products;
@@ -319,7 +319,7 @@ export default {
   mounted() {
     this.getPath();
     this.getProducts();
-
+    // 搜尋
     window.addEventListener('scroll', this.scrollList);
     this.$refs.searchInput.addEventListener('keydown', (e) => {
       if (e.keyCode === 13) {
@@ -327,7 +327,6 @@ export default {
         window.removeEventListener('scroll', this.scroll);
       }
     });
-
     // loading
     this.emitter.emit('page-loading', true);
     setTimeout(() => {
