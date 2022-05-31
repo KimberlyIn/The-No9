@@ -9,27 +9,26 @@
             class="page-link" 
             href="#" 
             aria-label="Previous"
-            @click.prevent="$emit('get-datas', pages.current_page - 1)"
+            @click.prevent="updatePage(pages.current_page - 1)"
           >
             <span aria-hidden="true">&laquo;</span>
           </a>
         </li>
         <li 
           class="page-item"
-          v-for="(item, key) in pages.total_pages"
-          :key="key"
-          :class="{ active: item === pages.current_page }"
+          v-for="page in pages.total_pages"
+          :key="page"
+          :class="{ active: page === pages.current_page }"
         >
-          <span class="page-link" v-if="item === pages.current_page">
-            {{ item }}
+          <span class="page-link" v-if="page === pages.current_page">
+            {{ page }}
           </span>
           <a
             class="page-link"
             v-else
             href="#"
-            @click.prevent="$emit('get-datas', item)"
-          >
-            {{ item }}
+            @click.prevent="updatePage(page)"
+            >{{ page }}
           </a>
         </li>
         <li 
@@ -40,7 +39,7 @@
             class="page-link"
             href="#"
             aria-label="Next"
-            @click.prevent="$emit('get-datas', pages.current_page + 1)"
+            @click.prevent="updatePage(pages.current_page + 1)"
           >
             <span aria-hidden="true">&raquo;</span>
           </a>
@@ -54,12 +53,12 @@
 export default {
   // Products.vue 的 pagination 傳送進來
   props:['pages'],
-  // methods: {
-  //   updatePage(page) {
-  //     // emit 觸發 Products.vue 的 getProducts
-  //     // 並且代入 getProducts 的參數 page
-  //     this.$emit('emitPages', page);
-  //   },    
-  // },
+  methods: {
+    updatePage(page) {
+      // emit 觸發 Products.vue 的 getProducts
+      // 並且代入 getProducts 的參數 page
+      this.$emit('emitPages', page);
+    },    
+  },
 }
 </script>

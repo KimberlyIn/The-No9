@@ -111,7 +111,7 @@
             </router-link> -->
           </div>
         </div>
-        <Pagination :pages="pagination" @emit-pages="getPagesProducts"/>
+        <Pagination :pages="pages" @get-datas="filterProducts"/>
       </div>
     </div>
 
@@ -142,8 +142,6 @@ export default {
         category: '',
         page: '',
       },
-      pagination: {},
-      currentPage: 1,
       // 搜尋
       filterSearchDatas: [],
       searchInput: '',
@@ -182,22 +180,6 @@ export default {
       })
       .catch(() => {
         this.$httpMessageState(this.tips, '商品清單更新');
-      })
-    },
-    // 抓取頁數商品
-    getPagesProducts(page = 1) {
-      this.currentPage = page;
-      const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/products?page=${page}`;
-      this.isLoading = true;
-      this.$http.get(api)
-      .then((response) => {
-        this.products = response.data.products;
-        this.pagination = response.data.pagination;
-        this.isLoading = false;
-      })
-      .catch((error) => {
-        this.isLoading = false;
-        this.$httpMessageState(error.response, '錯誤訊息');
       })
     },
     // 加入購物車
@@ -240,6 +222,10 @@ export default {
       const newNavigator = navigator(page, this.tempArry);
       this.pages = newNavigator.pages;
       this.filterDatas = newNavigator.newArray;
+      // 跳往頁面
+      this.$router.push(
+        `./menu?category=${this.path.category}&page=${page}`,
+      );
     },
     // 搜尋
     filterSearchProducts() {
@@ -333,7 +319,6 @@ export default {
   mounted() {
     this.getPath();
     this.getProducts();
-    this.getPagesProducts();
 
     window.addEventListener('scroll', this.scrollList);
     this.$refs.searchInput.addEventListener('keydown', (e) => {

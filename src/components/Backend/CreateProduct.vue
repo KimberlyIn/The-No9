@@ -27,7 +27,7 @@
                   >或 上傳圖片
                   <i
                     class="fas fa-spinner fa-spin"
-                    v-if="status.fileUploading"
+                    v-show="status.fileUploading"
                   ></i>
                 </label>
                 <input
@@ -191,14 +191,14 @@ export default {
           this.$refs.fileInput.value = '';
           this.emitter.emit('push-message', {
             style: 'success',
-            title: '圖片上傳結果',
+            title: '圖片上傳成功',
             content: response.data.message,
           });
         } else {
           this.$refs.fileInput.value = '';
           this.emitter.emit('push-message', {
             style: 'danger',
-            title: '圖片上傳結果',
+            title: '圖片上傳成功',
             content: response.data.message,
           });
         }
