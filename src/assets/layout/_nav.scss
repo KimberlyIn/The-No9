@@ -217,6 +217,12 @@
   }
   .icon-bi-cart {
     margin-right: 50px;
+    a {
+      &:focus {
+        outline: none;
+        box-shadow: none;
+      }
+    }
   }
   .cart-icon {
     position: absolute;
