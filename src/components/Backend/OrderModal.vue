@@ -71,7 +71,13 @@
                   <tbody>
                     <tr v-for="item in tempOrder.products" :key="item.id">
                       <th>{{ item.product.title }}</th>
-                      <td>{{ item.qty }} / {{ item.product.unit }}</td>
+                      <td width="70">{{ item.qty }} / {{ item.product.unit }}</td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <p>備註：{{ tempOrder.message }}</p>
+                      </td>
+                      <td></td>
                     </tr>
                   </tbody>
                 </table>

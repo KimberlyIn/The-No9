@@ -8,7 +8,7 @@
             <div class="row">
               <div class="col-12 pb-3">
                 <div
-                  style="height: 400px; background-size: cover; background-position: center"
+                  style="height: 500px; background-size: cover; background-position: center"
                   :style="{ 'background-image': `url(${enterImage})` }">
                 </div>
               </div>
@@ -141,7 +141,7 @@
     <div class="container">
       <div class="pt-5">
         <div>
-          <RecProductsCardSwiper :limitCount="999" :filterProduct="recProduct" />
+          <RecProductsCardSwiper />
         </div>
       </div>
     </div>
@@ -159,18 +159,18 @@ export default {
       product: {},
       products: [],
       productId: '',
-      category: '',
+      // category: '',
       prev_product: {},
       next_product: {},
       cart: {
         quantity: 1,
       },
       enterImage: '',
-      recProduct: {
-        id: 0,
-        name: '',
-        category: '',
-      },
+      // recProduct: {
+      //   id: 0,
+      //   name: '',
+      //   category: '',
+      // },
     };
   },
   inject: ['emitter', '$httpMessageState'],
@@ -191,7 +191,7 @@ export default {
   methods: {
     // 取得所有商品
     getProducts() {
-      const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/products`;
+      const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/products/all`;
       this.isLoading = true;
       this.$http
       .get(api)
@@ -217,18 +217,18 @@ export default {
           const tempItem = { ...response.data.product };
           this.product = { ...tempItem };
           // 取得推薦產品資訊
-          this.recProduct = {
-            id: this.product.id,
-            name: this.product.title,
-            category: this.product.category,
-          };
+          // this.recProduct = {
+          //   id: this.product.id,
+          //   name: this.product.title,
+          //   category: this.product.category,
+          // };
           // 取得商品圖片
           const { 0: img } = this.product.imagesUrl;
           this.enterImage = img;
           this.getSiblingProduct(this.products);
         } else {
           // 查無產品時，導向404
-          this.$router.push('/product');
+          // this.$router.push('/product');
           this.$httpMessageState(response, '取得產品');
         }
       })
@@ -284,16 +284,9 @@ export default {
       }
       this.$router.push(`./${item.productId}`);
     },
+
   },
-  watch: {
-    $route() {
-      this.productId = this.$route.params.productId;
-      if (this.productId !== undefined) {
-        this.getProduct();
-      }
-    },
-  },
-  mounted() {
+  created() {
     // 取得產品ID
     this.productId = this.$route.params.productId;
     // 載入單一產品

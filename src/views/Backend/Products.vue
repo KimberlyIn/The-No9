@@ -64,6 +64,12 @@ import CreateProduct from '@/components/Backend/CreateProduct.vue';
 import DeleteProduct from '@/components/Backend/DeleteProduct.vue';
 
 export default {
+  inject: ['emitter'],
+  components: {
+    Pagination,
+    CreateProduct,
+    DeleteProduct,
+  },
   data() {
     return {
       products: [],
@@ -82,12 +88,6 @@ export default {
       currentPage: 1,
     };
   },
-  components: {
-    Pagination,
-    CreateProduct,
-    DeleteProduct,
-  },
-  inject: ['emitter'],
   methods: {
     // 抓取頁數商品
     getProducts(page = 1) {

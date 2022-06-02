@@ -27,7 +27,7 @@
     >
       <swiper-slide v-for="product in products" :key="product.id">
         <div class="menu">
-          <div class="product-component product-col top" @click="toTop">
+          <div class="product-component product-col">
             <!-- <div class="pos-rel product-img">
               <a href="#" @click.prevent="viewProduct(product.id)">
                 <span class="sale" v-if="product.price < product.origin_price">On Sale !!</span>
@@ -42,7 +42,7 @@
               class="pos-rel product-img"
               style="height: 300px; background-size: cover; background-position: center"
               :style="{backgroundImage: `url(${product.imageUrl})`}"
-              @click="viewProduct(product.id)"
+              @click.prevent="viewProduct(product.id)"
               role="button"
             >
               <div class="dark-bg">
@@ -96,21 +96,53 @@ import Swiper2, {Autoplay} from 'swiper';
 Swiper2.use([Autoplay]);
 
 export default {
-  inject: ['emitter', '$httpMessageState'],
   components: {
     Swiper,
     SwiperSlide,
+  },
+  props: {
+    product: {
+      type: Object,
+      default() {
+        return {};
+      },
+    },
+    // 限制項目筆數
+    limitCount: {
+      type: Number,
+      default() {
+        return 4;
+      },
+    },
+    // 篩選產品
+    filterProduct: {
+      type: Object,
+      default() {
+        return {
+          name: '',
+          category: '',
+        };
+      },
+    },
+  },
+  watch: {
+    // 監聽是否有變動推薦產品
+    filterProduct() {
+      this.getProducts();
+    },
   },
   data() {
     return {
       // 推薦產品
       products: [],
+      filterProducts: [],
+      recStr: '手提包',
+      // 產品數量
+      productCount: 1,
       modules: [Autoplay],
     };
   },
-  mounted() {
-    this.getProducts();
-  },
+  inject: ['emitter', '$httpMessageState'],
   methods: {
     // 取得推薦清單
     getProducts() {
@@ -120,6 +152,36 @@ export default {
         .then((response) => {
           if (response.data.success) {
             this.products = response.data.products;
+            // 判段是否有相關產品類別
+            // recStrCategory 就是如果有內容救回傳內容，如果沒有就回傳空值
+            // 雖然在這裡判斷了這個商品是否有類別，但還要判斷這個商品是否為商品本身，不會重複推薦商品
+            const recStrCategory = this.filterProduct.category !== '' ? this.filterProduct.category : '';
+            // 取得推薦產品
+            this.productCount = 0;
+            this.filterProducts = [];
+
+            this.products.forEach((item) => {
+              if (recStrCategory !== '') {
+                //取得不包含產品本身的推薦產品（同類別）
+                // 這個項目的 id 不等於 這些產品的 id 和 這個項目的類別，等同於這些項目的類別
+                if (item.id !== this.filterProduct.id && item.category === recStrCategory) {
+                  // 產品數量小於限制項目筆數，產品數量就 +1
+                  if (this.productCount < this.limitCount) {
+                    const tempItem = { ...item };
+                    this.filterProducts.push(tempItem);
+                    this.productCount += 1;
+                  }
+                }
+                // 判斷 title 是否包含 recStr 的值
+              } else if (item.title.includes(this.recStr)) {
+                // 產品筆數限制
+                if (this.productCount < this.limitCount) {
+                  const tempItem = { ...item };
+                  this.filterProducts.push(tempItem);
+                  this.productCount += 1;
+                }
+              }
+            });
           } else {
             this.$httpMessageState(response, '取得推薦清單');
           }
@@ -127,6 +189,10 @@ export default {
         .catch(() => {
           this.$httpMessageState(this.tips, '取得推薦清單');
         });
+    },
+    // 檢視商品詳細資訊
+    viewProduct(productId) {
+      this.$router.push(`/product/${productId}`);
     },
     // 加入購物車
     getCart(id, qty = 1) {
@@ -146,25 +212,9 @@ export default {
         }
       })
     },
-    // 檢視商品詳細資訊
-    viewProduct(productId) {
-      this.$router.push(`/product/${productId}`);
-    },
-    toTop() {
-      document.documentElement.scrollTop = 0;
-
-      this.emitter.emit('page-loading', true);
-      setTimeout(() => {
-        this.emitter.emit('page-loading', false);
-      }, 1000);
-    },
   },
-  
+  mounted() {
+    this.getProducts();
+  },
 }
 </script>
-
-<style>
-.go-to-top {
-  height: 5000px;
-}
-</style>

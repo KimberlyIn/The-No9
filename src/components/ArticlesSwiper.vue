@@ -52,7 +52,6 @@ export default {
   },
   data() {
     return {
-      // filterArticles: [],
       articles: [],
       // 文章數量
       articleCount: 1,
@@ -62,10 +61,6 @@ export default {
       },
       modules: [Autoplay],
       breakpoints: {
-        // 1920: {
-        //   slidesPerView: 9,
-        //   spaceBetween: 20,
-        // },
         1200: {
           slidesPerView: 4,
           spaceBetween: 20,

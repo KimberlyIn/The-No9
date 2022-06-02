@@ -157,6 +157,12 @@ export default {
         this.$httpMessageState(error.response, '錯誤訊息');
       })
     },
+    openDelArticleModal(item) {
+      this.tempArticle = { ...item };
+      // this.$refs.deleteProduct.openModal();
+      const delComponent = this.$refs.deleteProduct;
+      delComponent.openModal();
+    },
     delArticle() {
       const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/article/${this.tempArticle.id}`;
       this.$http.delete(api)
@@ -170,12 +176,6 @@ export default {
       .catch((error)=>{
         this.$httpMessageState(error.response, '刪除貼文');
       });
-    },
-    openDelArticleModal(item) {
-      this.tempArticle = { ...item };
-      // this.$refs.deleteProduct.openModal();
-      const delComponent = this.$refs.deleteProduct;
-      delComponent.openModal();
     },
   },
 }

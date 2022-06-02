@@ -29,6 +29,9 @@
                     <p>{{ product.product.title }} 　　數量：{{ product.qty }} {{ product.product.unit }}</p>
                     <!-- {{ product.qty }} 用網頁看 vue 可以看到 qty 和 product 同層，因此這邊是 {{ 自定義 product.products 的 qty }} -->
                   </li>
+                  <li>
+                    <p>備註：{{ item.message }}</p>
+                  </li>
                 </ul>
               </td>
               <td>{{ item.total }}</td>
