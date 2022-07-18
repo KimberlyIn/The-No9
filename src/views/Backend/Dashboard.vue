@@ -42,12 +42,10 @@ export default {
       .then((response) => {
         if (response.data.success) {
           this.status = true;
-          // this.$router.push('/backend/products');
         } else {
           this.status = false;
           this.alertMsg = '授權無效，請先登入!';
           this.$httpMessageState(response, '授權');
-          // this.alertMsg = '授權無效，請先登入!';
           this.$httpMessageState(response, '授權');
           setTimeout(() => {
             this.$router.push('/login');
@@ -62,18 +60,5 @@ export default {
     this.$http.defaults.headers.common.Authorization = token;
     this.checkLogin();
   },
-  // created() {
-  //   const token = document.cookie.replace(/(?:(?:^|.*;\s*)hexToken\s*=\s*([^;]*).*$)|^.*$/, '$1');
-  //   this.$http.defaults.headers.common.Authorization = `${token}`;
-  //   const api = `${process.env.VUE_APP_API}/api/user/check`;
-  //   this.$http.post(api)
-  //     .then((response) => {
-  //       this.$httpMessageState(response, '登入');
-  //       this.status = true;
-  //     }).catch((error) => {
-  //       this.$router.push('/login');
-  //       this.$httpMessageState(error.response, '錯誤訊息');
-  //     });
-  // },
 }
 </script>

@@ -32,11 +32,6 @@ export default {
     ToastMessages,
     Footer,
   },
-  // 這裡有外層的 provide 要移到內層，provide 可以解釋成「提供」，inject 可以解釋成「注入」
-  // 這個地方的意思就是，我們要把 eventBus.js 從外面注入到這裡
-  // eventBus.js 裡面，mitt() 被定義成 emitter，因此最後被注入的名稱即為 emitter
-  // 問題：這邊有個疑問是，我們知道 provide 是提供，inject 是注入，但是在這裡沒有看到 provide 資料
-  // inject:['emitter'],
   inject: ['emitter'],
   data() {
     return {

@@ -8,7 +8,6 @@
               <img src="@/assets/images/logo-light.png" alt="TheNo9-LOGO" style="width: 180px;" class="me-3" />
             </div>
             <div class="d-flex align-items-en">
-              <!-- <router-link class="pt-3 text-light" to="/login">| 後台登入</router-link> -->
               <router-link class="pt-3 text-light" to="/login">
                 <small>| 後台登入</small>
               </router-link>

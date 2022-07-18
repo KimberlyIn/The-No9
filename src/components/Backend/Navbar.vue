@@ -25,24 +25,6 @@
 
 <script>
 export default {
-  // inject: ['emitter', '$httpMessageState'],
-  // methods: {
-  //   logout() {
-  //     const api = `${process.env.VUE_APP_API}/logout`;
-  //     this.$http.post(api)
-  //     .then((response) => {
-  //       if (response.data.success) {
-  //         this.$httpMessageState(response, '登出');
-  //         document.cookie = `hexToken='';expires=${new Date(-1)}; path=/`;
-  //         this.$router.push('/login');
-  //       } else {
-  //         this.$httpMessageState(response, '登出');
-  //       }
-  //     }).catch((error) => {
-  //       this.$httpMessageState(error.response, '錯誤訊息');
-  //     });
-  //   },
-  // },
   inject: ['emitter', '$httpMessageState'],
   methods: {
     logout() {

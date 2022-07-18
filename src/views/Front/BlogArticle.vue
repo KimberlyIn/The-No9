@@ -1,8 +1,4 @@
 <template>
-  <!-- <div class="loading bouncebag" :active="isLoading">
-    <i class="fas fa-2x fa-shopping-bag bag"></i>
-    <span>loading</span>
-  </div> -->
   <div class="blog-article">
     <div class="header-bg w-100" style="height: 500px; background-color: #C9C9C9;">
       <div class="container bg-white">

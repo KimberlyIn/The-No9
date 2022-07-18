@@ -28,7 +28,6 @@
               </div>
               <div class="col-12 mb-3">
                 <label for="due_date" class="form-label">到期日</label>
-                <!-- due_date 在 coupons 裡面 -->
                 <input type="date" class="form-control" id="due_date" v-model="due_date">
               </div>
               <div class="col-12 mb-3">
@@ -57,7 +56,6 @@
               class="btn btn-secondary" 
               @click="$emit('update-coupon', tempCoupon)"
             >
-              <!-- 如果 isNew 是 true 就新增商品，如果是 false 就更新優惠券 -->
               {{ isNew ? '新增商品': '更新優惠券' }}
             </button>
           </div>

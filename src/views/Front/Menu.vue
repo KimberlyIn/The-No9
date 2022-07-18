@@ -77,7 +77,6 @@
             >
               <div class="dark-bg">
                 <small class="px-2 py-2">查看內容</small>
-                <!-- <button class="px-5 me-2">查看商品</button> -->
               </div>
               <span class="sale" v-if="item.price < item.origin_price">On Sale !!</span>
               
@@ -106,9 +105,6 @@
                 </button>
               </div>
             </div>
-            <!-- <router-link class="product-card"> 
-
-            </router-link> -->
           </div>
         </div>
         <Pagination :pages="pages" @get-datas="filterProducts"/>

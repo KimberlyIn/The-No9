@@ -2,7 +2,6 @@
   <div class="toast-container position-fixed end-0 float-end" style="z-index: 1500;top: 128px">
     <div v-for="(msg, key) in messages" :key="key" class="toast show" role="alert">
       <div class="toast-header bg-light text-white" style="height:50px;">
-        <!-- <span :class="`bg-${msg.style}`" class="p-2 rounded me-2 d-inline-block"></span> -->
         <i
           class="bi bi-exclamation-circle-fill p-2 rounded me-2 d-inline-block text-muted"
           style="font-size:1.25rem;"

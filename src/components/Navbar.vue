@@ -1,7 +1,5 @@
 <template>
-  <div class="sticky-top" style="z-index: 9;">
-    <!-- :class="toggleNav ? 'position-fixed vh-100 overflow-hidden' : ''" -->
-    
+  <div class="sticky-top" style="z-index: 9;">    
     <nav 
       class="navbar navbar-expand-lg navbar-light" 
       v-show="$route.meta.istrun"
@@ -147,7 +145,6 @@
                       </div>
                     </div>
                   </div>
-                  <!-- @click="removeCartItem(item.id)" 不加 item 沒辦法刪除項目 -->
                   <div class="product-delete align-self-center">
                     <button 
                       type="button" 
@@ -368,7 +365,6 @@
                         </div>
                       </div>
                     </div>
-                    <!-- @click="removeCartItem(item.id)" 不加 item 沒辦法刪除項目 -->
                     <div class="product-delete align-self-center">
                       <button 
                         type="button" 

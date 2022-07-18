@@ -1,6 +1,5 @@
 <template>
   <div class="login" style="background-color: rgb(236, 236, 236);">
-    <!-- <Loading :active="isLoading" :z-index="1060"></Loading> -->
     <ToastMessages></ToastMessages>
     <div class="container vh-100">
       <form 
@@ -117,47 +116,5 @@ export default {
     this.$http.defaults.headers.common.Authorization = token;
     this.checkLogin();
   },
-  // methods: {
-  //   login() {
-  //     this.isLoading = true;
-  //     const api = `${process.env.VUE_APP_API}/admin/signin`;
-  //     this.$http.post(api, this.user)
-  //     .then((response) => {
-  //       if(response.data.success) {
-  //         const { token, expired } = response.data;
-  //         this.accessCookie(token, expired);
-  //         this.$router.push('/admin');
-  //       }
-  //       this.isLoading = false;
-  //     })
-  //     .catch((error) => {
-  //       this.isLoading = false;
-  //       this.$httpMessageState(error.response, '登入');
-  //     })
-  //   },
-  //   checkAdmin() {
-  //     const api = `${process.env.VUE_APP_API}/api/user/check`;
-  //     this.$http.post(api)
-  //     .then((response)=>{
-  //       if(response.data.success) {
-  //         this.$router.push('/admin');
-  //       } else {
-  //         // ...
-  //       }
-  //     })
-  //     .catch((error) => {
-  //       this.isLoading = false;
-  //       this.$httpMessageState(error.response, '登入');
-  //     })
-  //   },
-  //   accessCookie(token, expired) {
-  //     document.cookie = `hexToken=${token};expires=${new Date(expired)}; path=/`;
-  //   },
-  //   created() {
-  //     const token = document.cookie.replace(/(?:(?:^|.*;\s*)hexToken\s*=\s*([^;]*).*$)|^.*$/, '$1');
-  //     this.$http.defaults.headers.common.Authorization = token;
-  //     this.checkAdmin();
-  //   },
-  // },
 };
 </script>

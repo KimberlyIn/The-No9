@@ -48,9 +48,6 @@
         </tbody>
       </table>
     </div>
-    
-    <!-- :pages="pagination" 外層 Products.vue 的 pagination 傳遞 data 到內層 Pagination.vue 並自定義名稱為 pages -->
-    <!-- @emit-page="getProducts" 內層 Pagination.vue 用 emit 觸發外層 Products.vue 的 getProducts，且自訂義名稱為 emit-page -->
     <Pagination :pages="pagination" @get-datas="getProducts"></Pagination>
     <CreateProduct :product="tempProduct" :isNew="isNew" @update-product="updateProduct" ref="createProduct"/>
 
@@ -80,10 +77,6 @@ export default {
       status: {
         fileUploading: false,
       },
-      // modal: {
-      //   editModal: '',
-      //   delModal: '',
-      // },
       // 調用頁數資料使用
       currentPage: 1,
     };
@@ -117,7 +110,6 @@ export default {
       productComponent.openModal();
     },
     updateProduct(item) {
-      // 這個部分猜測是直接將 item 賦予到上面 data 的 tempProuct
       this.tempProduct = item;
       let api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/product`;
       this.isLoading = true;
@@ -141,7 +133,6 @@ export default {
     },
     openDelProductModal(item) {
       this.tempProduct = { ...item };
-      // 這個部分對到 DeleteProduct.vue 的 id="deleteProduct"
       const delComponent = this.$refs.deleteProduct;
       delComponent.openModal();
     },
@@ -152,7 +143,6 @@ export default {
       .then((response) => {
         this.isLoading = false;
         this.$httpMessageState(response, '刪除產品');
-        // 這個部分對到 DeleteProduct.vue 的 id="deleteProduct"
         const delComponent = this.$refs.deleteProduct;
         delComponent.hideModal();
         this.getProducts(this.currentPage);

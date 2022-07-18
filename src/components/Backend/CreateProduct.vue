@@ -129,7 +129,6 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">取消</button>
-            <!-- @click="$emit('update-product', tempProduct)" data 裡的 tempProduct 已被賦予傳進來的 product? -->
             <button type="button" class="btn btn-secondary" @click="$emit('update-product', tempProduct)">確認</button>
           </div>
         </div>

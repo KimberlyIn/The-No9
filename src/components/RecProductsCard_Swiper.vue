@@ -28,16 +28,6 @@
       <swiper-slide v-for="product in products" :key="product.id">
         <div class="menu">
           <div class="product-component product-col top" @click="toTop">
-            <!-- <div class="pos-rel product-img">
-              <a href="#" @click.prevent="viewProduct(product.id)">
-                <span class="sale" v-if="product.price < product.origin_price">On Sale !!</span>
-                <div
-                  style="height: 300px; background-size: cover; background-position: center"
-                  :style="{backgroundImage: `url(${product.imageUrl})`}"
-                  >
-                </div>
-              </a>
-            </div> -->
             <div 
               class="pos-rel product-img"
               style="height: 300px; background-size: cover; background-position: center"
@@ -47,7 +37,6 @@
             >
               <div class="dark-bg">
                 <small class="px-2 py-2">查看內容</small>
-                <!-- <button class="px-5 me-2">查看商品</button> -->
               </div>
               <span class="sale" v-if="product.price < product.origin_price">On Sale !!</span>
               

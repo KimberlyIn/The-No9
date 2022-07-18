@@ -21,13 +21,8 @@
               </td>
               <td>
                 <ul class="list-unstyled">
-                  <!-- v-for="(product, i) in item.products" (product, i) product 可以自行定義， i 為索引值
-                  item.products 用網頁看 vue 項目會看到，項目底下有一個 products
-                  products 裡面還有一個 product
-                  因此 {{ product.product.title }} 則是 {{ 自定義的 product.項目裡的 product.product 裡的 title }} -->
                   <li v-for="(product, i) in item.products" :key="i">
                     <p>{{ product.product.title }} 　　數量：{{ product.qty }} {{ product.product.unit }}</p>
-                    <!-- {{ product.qty }} 用網頁看 vue 可以看到 qty 和 product 同層，因此這邊是 {{ 自定義 product.products 的 qty }} -->
                   </li>
                   <li>
                     <p>備註：{{ item.message }}</p>
@@ -37,7 +32,6 @@
               <td>{{ item.total }}</td>
               <td>
                 <div class="form-check form-switch">
-                  <!-- :id="`paidCheck${item.id}`" paidCheck為自定義 -->
                   <input 
                     class="form-check-input" 
                     type="checkbox" 

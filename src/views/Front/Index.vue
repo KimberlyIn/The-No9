@@ -105,17 +105,6 @@ export default {
       email: '',
       idDisabled: false,
       show: true,
-
-      // Loading物件
-      // loadingStatus: {
-      //   loadingItem: '',
-      // },
-      // tips: {
-      //   data: {
-      //     success: true,
-      //     message: '感謝您的訂閱!',
-      //   },
-      // },
     };
   },
   mounted() {
@@ -142,21 +131,6 @@ export default {
         this.show = false;
       }, 1500);
     },
-    // 訂閱電子信箱
-    // onSubscribe() {
-    //   this.loadingStatus.loadingItem = 'email';
-    //   // 1秒後顯示「訂閱成功!」
-    //   setTimeout(() => {
-    //     this.loadingStatus.loadingItem = '';
-    //     this.$httpMessageState(this.tips, '訂閱');
-    //     this.isVerifyEmail = false;
-    //     this.subscriptionEmail = '';
-    //   }, 1000);
-    // },
-    // // 設定訂閱電子信箱是否驗證
-    // isVerify(verify) {
-    //   this.isVerifyEmail = verify;
-    // },
   },
 };
 </script>

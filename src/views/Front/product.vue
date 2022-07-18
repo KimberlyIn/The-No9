@@ -12,10 +12,7 @@
                   :style="{ 'background-image': `url(${enterImage})` }">
                 </div>
               </div>
-              <!-- :class="img === enterImage ? 'active' : ''"
-                  如果點選到 enterImage 就回傳 active，如果沒有點選到，救回傳空字串 -->
 
-              <!-- @mouseover="enterImage = img" 滑鼠監聽 -->
               <div class="col-4"
                 role="button"
                 v-for="(img, key) in product.imagesUrl"
@@ -49,9 +46,6 @@
                 <small :class="product.price < product.origin_price ? 'del' : ''">$ {{ $cash(product.origin_price) }} NTD</small>
                 <small class="fs-6 ms-2 text-secondary">/ {{ product.unit }}</small>
               </p>
-              <!-- <div class="fs-3 fw-bold" v-if="!product.id">NT$ {{ product.origin_price }} / {{ product.unit }}</div>
-              <del class="fs-6 text-secondary" v-if="product.id">原價 NT$ {{ product.origin_price }}</del>
-              <div class="fs-3 fw-bold" v-if="product.id">NT$ {{ product.price }} / {{ product.unit }}</div> -->
             </div>
             <p class="mb-2 letter-spacing-1 text-secondary">・ {{ product.description }}</p>
             <p class="mb-5 letter-spacing-1 line-height-2 text-secondary">
@@ -159,18 +153,12 @@ export default {
       product: {},
       products: [],
       productId: '',
-      // category: '',
       prev_product: {},
       next_product: {},
       cart: {
         quantity: 1,
       },
       enterImage: '',
-      // recProduct: {
-      //   id: 0,
-      //   name: '',
-      //   category: '',
-      // },
     };
   },
   inject: ['emitter', '$httpMessageState'],
@@ -216,19 +204,11 @@ export default {
           // 取得單一產品
           const tempItem = { ...response.data.product };
           this.product = { ...tempItem };
-          // 取得推薦產品資訊
-          // this.recProduct = {
-          //   id: this.product.id,
-          //   name: this.product.title,
-          //   category: this.product.category,
-          // };
           // 取得商品圖片
           const { 0: img } = this.product.imagesUrl;
           this.enterImage = img;
           this.getSiblingProduct(this.products);
         } else {
-          // 查無產品時，導向404
-          // this.$router.push('/product');
           this.$httpMessageState(response, '取得產品');
         }
       })

@@ -46,7 +46,6 @@
             </tr>
           </tbody>
         </table>
-        <!-- <CouponModal></CouponModal> 和 <CouponModal/> 有什麼分別 -->
         <CouponModal :coupon="tempCoupon" @update-coupon="updateCoupon" :isNew="isNew" ref="couponModal" />
         <DeleteProduct :item="tempCoupon" @del-product="delCoupon" ref="deleteProduct" />
       </div>
@@ -89,7 +88,6 @@ export default {
       }
       this.$refs.couponModal.openModal();
     },
-    // 為什麼刪除需要淺曾拷貝？
     delOpenCouponModal(item) {
       this.tempCoupon = {...item};
       const delComponent = this.$refs.deleteProduct;
@@ -128,10 +126,8 @@ export default {
         this.isLoading = false;
         this.$httpMessageState(response, '新增優惠券');
         this.getCoupons();
-        // 底下兩種寫法都可以
         const couponComponent = this.$refs.couponModal;
         couponComponent.hideModal();
-        // this.$refs.couponModal.hideModal();
       })
       .catch((error) => {
         this.isLoading = false;

@@ -1,13 +1,6 @@
 <template>
-  <!-- 
-    1.抓取所有文章列表 
-    2.對每個位置補上抓到的對應資料
-    3.製作建立新文章：串接 post Api
-    4.
-  -->
   <div>
     <div class="div-backend-top">
-      <!-- <Loading :actuve="isLoading" :z-index="1060"></Loading> -->
       <div class="text-end mt-4 mx-5"> 
         <button 
           type="button" 
@@ -60,7 +53,6 @@
         </table>
       </div>
     </div>
-    <!-- ArticleModal.vue 中觸發 button @click="$emit('update-article', tempArticle)" -->
     <ArticleModal :article="tempArticle" :is-new="isNew" ref="articleModal" @update-article="updateArticle"/>
     <DeleteProduct :item="tempArticle" @del-product="delArticle" ref="deleteProduct"/>
   </div>
@@ -87,7 +79,6 @@ export default {
     };
   },
   mounted() {
-    // 這裡要執行才會出現列表
     this.getArticles();
   },
   methods: {
@@ -116,9 +107,6 @@ export default {
         this.$httpMessageState(error.response, '錯誤訊息');
       })
     },
-    // 雖然 openModal 大致上都寫好，也在 button 正確的放上 click
-    // 但是 this.$refs.articleModal.openModal(); 需要靠 modalMixin 啟用
-    // 所以記得在 ArticleModal.vue 把 modalMixin 載入
     openModal(isNew, item) {
       if (isNew) {
         this.tempArticle = {
@@ -144,13 +132,11 @@ export default {
         httpMethod = 'put';
         status = '更新貼文'
       }
-      // this.$refs.articleModal.hideModal();
       const articleComponent = this.$refs.articleModal;
       this.$http[httpMethod](api, { data: this.tempArticle })
       .then((response)=>{
         this.$httpMessageState(response, status);
         articleComponent.hideModal();
-        // this.$refs.articleModal.hideModal();
         this.getArticles(this.currentPage);
       })
       .catch((error) => {
@@ -159,7 +145,6 @@ export default {
     },
     openDelArticleModal(item) {
       this.tempArticle = { ...item };
-      // this.$refs.deleteProduct.openModal();
       const delComponent = this.$refs.deleteProduct;
       delComponent.openModal();
     },
@@ -168,7 +153,6 @@ export default {
       this.$http.delete(api)
       .then((response)=>{
         this.$httpMessageState(response, '刪除貼文');
-        // this.$refs.deleteProduct.hideModal();
         const delComponent = this.$refs.deleteProduct;
         delComponent.hideModal();
         this.getArticle(this.currentPage);
